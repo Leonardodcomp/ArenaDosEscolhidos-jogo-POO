@@ -4,4 +4,5 @@ Jogo criado para compor parte da nota da disciplina de Programação Orientada a
 
 Observações iniciais:
 1- Nossos personagens possuem nome de batismo, então já vem com nome pré-definido
-2= Para integrar um RPG usual, estamos usando a biblioteca java.util.Random, para usar o método random.nextInt() que terá a função de nosso dado, ele ajudará também nos calculos de probabilidade
+
+2- Para integrar um RPG usual, estamos usando a biblioteca java.util.Random, para usar o método random.nextInt() que terá a função de nosso dado, ele ajudará também nos calculos de probabilidade
