@@ -1,6 +1,7 @@
 public class Arcanista extends Combatente {
     private String nome = "José de Alencar";
     private int mana;
+    private int qtdd;
 
     public Arcanista(String nome) {
         super(60); // Teoricamente é o que da dano, então tem que ser mole
@@ -27,4 +28,11 @@ public class Arcanista extends Combatente {
             alvo.receberDano(dano);
         }
     }
+
+    public void morte(String name){
+        this.nome= name;
+        this.vida=vidaMaxima;
+        qtdd-=1;//alterar a quantidade de arcanistas para jogar.
+    }
+
 }
