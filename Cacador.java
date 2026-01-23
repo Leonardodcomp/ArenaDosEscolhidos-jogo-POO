@@ -1,5 +1,6 @@
 public class Cacador extends Combatente {
     private String nome = "Jessica";
+    private int qtdd;
 
     public Cacador(String nome) {
         super(80); // Vida média-baixa
@@ -21,5 +22,11 @@ public class Cacador extends Combatente {
         }
         
         alvo.receberDano(danoBase);
+    }
+
+    public void morte(String name){
+        this.nome= name;
+        this.vida=vidaMaxima;
+        qtdd-=1;//alterar a quantidade de caçadores para jogar.
     }
 }
