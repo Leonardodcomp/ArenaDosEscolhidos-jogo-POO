@@ -2,8 +2,10 @@ public class Cacador extends Combatente {
     private String nome = "Jessica";
     private int qtdd;
 
-    public Cacador(String nome) {
+    public Cacador(String name, int quantidade_cacador) {
         super(80); // Vida média-baixa
+        this.nome= name;
+        this.qtdd = quantidade_cacador;
     }
 
     @Override
@@ -27,6 +29,7 @@ public class Cacador extends Combatente {
     public void morte(String name){
         this.nome= name;
         this.vida=vidaMaxima;
-        qtdd-=1;//alterar a quantidade de caçadores para jogar.
+        this.qtdd-=1;//alterar a quantidade de caçadores para jogar.
+        this.estus = 2;
     }
 }
