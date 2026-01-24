@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.ArrayList; // Importação usada na geração das listas de combantes, a fim de atribuir objetos de diferentes classes em uma única lista
+import java.util.Random; // Importação usada na parte de geração de números aleatórios para distribuição de combatentes para a classe B
 
 public class arena {
     private ArrayList<Combatente> LadoA = new ArrayList<>(); // Como o jogo terá vários guerreiros por partida, necessitamos dá criação de listas com esses guerreiros de modo a alterná-los durante a partida
@@ -33,6 +34,7 @@ public class arena {
         int qtd1;
         int qtd2;
         int qtd3; 
+        int quantidade_B;
     /* A fim de que o usuário selecine quantos combatentes de cada classe ele quer parar usar em sua partida
     criamos janelas que solicitama quantidade de cada classe*/
 
@@ -60,8 +62,23 @@ public class arena {
             qtd3 = 0; 
         }                              
         for (int i = 1; i <= qtd3; i++) {ladoA.add(new Guardiao("Guardiao" + i));}
+        /* Agora com a quantidade de combatentes  do ladoA gerado, basta que a gente some as quantidades e crie um loop para preencher o ladoB com a mesma quantidade total de combatentes, mas distribuição aleatória.*/
+        quantidade_B = qtd1+qtd2+qtd3;
+        Random gerador = new Random(); // Objeto para sortear os números
+        
 
-
+        for (int i = 1; i <= quantidade_B; i++){
+            int escolha = gerador.nextInt(3); // Essa linha de comendo permite que sejam gerados números que vão de 0 a 2
+            // Abaixo, temos estruturas condicionais que, a partir do números gerados aleatoriamente, permite escolher de qual classe será o próximo combatente
+            if(escolha == 0){
+                ladoB.add(new Arcanista("Inimigo Mago " + i));
+            } else if(escolha == 1) {
+                ladoB.add(new Guardiao("Inimigo Guardiao" + i));
+            } else{
+                 ladoB.add(new Cacador("Inimigo Cacador" + i));
+            }
+            
+        }
         
     }
     
