@@ -37,26 +37,27 @@ public class arena {
     criamos janelas que solicitama quantidade de cada classe*/
 
         try{ // Aqui colocamos em prática alguns conceitos que, inclusive, foram passados em sala de aula pelo professor a fim de evitar erros por mau uso durante o jogo
-            String input = JOptionPane.showInputDialog("Quantos Arcanistas no Lado A?");
-            qtd1 = (input == null) ? 0 : Integer.parseInt(input);} catch(NumberFormatException e) { 
-            JOptionPane.showMessageDialog(null, "Insira apenas numeros inteiros!"); 
+            String input = JOptionPane.showInputDialog("Quantos Arcanistas no Lado A?"); // Aqui, uma janela JOption que pergunta ao usuário quantos combatentes ele quer dessa determinada classe
+            qtd1 = (input == null) ? 0 : Integer.parseInt(input);} catch(NumberFormatException e) { // Nessa linha, usamos terário para verificar se a caixa está vazia e, nesse  caso, atribuir 0 ou o número digitado pelo usuário. Além disso, possibilita testar se o usuário colocou número e não letra ou simbolos, indo para uma possível alternativa com o catch
+            JOptionPane.showMessageDialog(null, "Insira apenas numeros inteiros!"); // Aqui, o aviso de alerta
             qtd1 = 0; // Aqui precisamos colocar o 0 para que o loop não dê problema com os caracteres inseridos pelo usuário
                 }
-        for (int i = 1; i <= qtd1; i++) {ladoA.add(new Arcanista("Arcanista " + i));} // Faz um loopzinho para ir adicionando todos de uma vez
+        // Daqui em diante, o processo das linhas anteriores se repetem para as próximas classes
+        for (int i = 1; i <= qtd1; i++) {ladoA.add(new Arcanista("Arcanista " + i));}
         try{                                
             String input = JOptionPane.showInputDialog("Quantos Caçadores no Lado A?");
             qtd2 = (input == null) ? 0 : Integer.parseInt(input);} catch(NumberFormatException e){ 
             JOptionPane.showMessageDialog(null, "Insira apenas numeros inteiros!"); 
-            qtd2 = 0; // Aqui precisamos colocar o 0 para que o loop não dê problema com os caracteres inseridos pelo usuário
+            qtd2 = 0;
             }
                                          
         for (int i = 1; i <= qtd2; i++) {ladoA.add(new Cacador("Caçador" + i));}
         try{                                 
             String input = JOptionPane.showInputDialog("Quantos Guardiões no Lado A?");
-            qtd3 = (input == null) ? 0 : Integer.parseInt(input); // Converte o texto para número
+            qtd3 = (input == null) ? 0 : Integer.parseInt(input);
         } catch(NumberFormatException e) {   
             JOptionPane.showMessageDialog(null, "Insira apenas numeros inteiros!"); 
-            qtd3 = 0; // Aqui precisamos colocar o 0 para que o loop não dê problema com os caracteres inseridos pelo usuário
+            qtd3 = 0; 
         }                              
         for (int i = 1; i <= qtd3; i++) {ladoA.add(new Guardiao("Guardiao" + i));}
 
