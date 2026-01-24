@@ -81,6 +81,10 @@ public class arena {
         }
         
     }
+    public void Ciclo_Turnos(){}
+
+
+
     
     public static void main(String[] args){
         arena a = new arena();//é aqui que irá fixar rodando o game.
