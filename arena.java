@@ -81,7 +81,27 @@ public class arena {
         }
         
     }
-    public void Ciclo_Turnos(){}
+    public void Ciclo_Turnos(){
+        String input = JOptionPane.showInputDialog("Digite a posiçào do combatente que irá ao combate agora");
+        int numero_combatente = Integer.parseInt(input);
+        Combatente lutadorA = ladoA.get(numero_combatente - 1);
+        Combatente lutadorB = ladoB.get(numero_combatente - 1);
+
+        while (lutadorA.toVivoGarai() == true && lutadorB.toVivoGarai() == true){
+
+            if (lutadorB.toVivoGarai()) {
+        // Se a vida for menor que 30% do total (ajuste esse número como preferir)
+        if (lutadorB.getVida() < 30) { 
+        System.out.println(lutadorB.getNome() + " está acuado e decide se curar! ");
+        lutadorB.curar(); 
+        } else {
+                System.out.println(lutadorB.getNome() + " parte para o ataque! ");
+                lutadorB.atacar(lutadorA);
+                     }
+    }
+        }
+        
+    }
 
 
 
