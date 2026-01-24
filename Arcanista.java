@@ -3,9 +3,11 @@ public class Arcanista extends Combatente {
     private int mana;
     private int qtdd;
 
-    public Arcanista(String nome) {
+    public Arcanista(String name, int quantidade_arcanistas) {
         super(60); // Teoricamente é o que da dano, então tem que ser mole
         this.mana = 100;  // Mana full
+        this.nome = name;
+        this.qtdd = quantidade_arcanistas;
     }
 
     @Override
@@ -32,7 +34,8 @@ public class Arcanista extends Combatente {
     public void morte(String name){
         this.nome= name;
         this.vida=vidaMaxima;
-        qtdd-=1;//alterar a quantidade de arcanistas para jogar.
+        this.qtdd-=1;//alterar a quantidade de arcanistas para jogar.
+        this.estus = 2;
     }
-
+    
 }
