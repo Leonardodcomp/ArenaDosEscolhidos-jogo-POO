@@ -81,27 +81,63 @@ public class arena {
         }
         
     }
+
+    // Aqui uma parte importante do código que definirá os turnos de cada jogador
+    // ou seja, qual ação o jogador tomará? Atacar ou defender? Assim como um IA para o adversário
     public void Ciclo_Turnos(){
-        String input = JOptionPane.showInputDialog("Digite a posiçào do combatente que irá ao combate agora");
-        int numero_combatente = Integer.parseInt(input);
-        Combatente lutadorA = ladoA.get(numero_combatente - 1);
-        Combatente lutadorB = ladoB.get(numero_combatente - 1);
+        Random gerador1 = new Random();
+        //Esse primeiro loop abaixo acontecerá até ambos os lados estarem sem jogadores, a fim de definir o vencedor.
+            while(!ladoA.isEmpty() && !ladoB.isEmpty()){
+                // Uma caixa de diálogo JOption exibida que pergunta ao usuário qual jogador ele quer em campo.
+                String input = JOptionPane.showInputDialog("Digite a posiçào do combatente que irá ao combate agora");
+                int numero_combatente = Integer.parseInt(input);
+                // Ao ser selecionada o jogador que irá a combate, a lógica abaixo realiza essa operação e replica a posição
+                // escolhida pelo jogador para o adversário
+                Combatente lutadorA = ladoA.get(numero_combatente - 1);
+                Combatente lutadorB = ladoB.get(gerador1.nextInt(ladoB.size()));
+                // Abaixo está o loop que se repetirá até que algum dos dois bonecos morram em combate
+                while (lutadorA.toVivoGarai() == true && lutadorB.toVivoGarai() == true){
+                    // Caixa de diálogo que perguntará qual ação o jogador tomará, atacar ou se curar?
+                    String acao = JOptionPane.showInputDialog("Lutador"+ lutadorA.getNome() + "\n1 - Atacar \n2 Curar")
+                    // Esse equals nada mais é que um comparador, mas em vez do "==" do java que compara endereços
+                    // o "equals" compara conteúdos
+                    if (acao.equals("1")) {
+                             lutadorA.atacar(lutadorB); ⚔️
+                        } else {
+                             lutadorA.curar(); 🧪
+                                    }
+                    if (lutadorB.toVivoGarai()) {
+                       // Se a vida for menor que 30% do total (ajuste esse número como preferir)
+                          if (lutadorB.getVida() < 30) { 
+                                System.out.println(lutadorB.getNome() + " está acuado e decide se curar! ");
+                                lutadorB.curar(); 
+                        } else {
+                                System.out.println(lutadorB.getNome() + " parte para o ataque! ");
+                                lutadorB.atacar(lutadorA);
+                                     } 
+                                }
+                }
 
-        while (lutadorA.toVivoGarai() == true && lutadorB.toVivoGarai() == true){
+                if(!lutadorA.toVivoGarai()){
+                    System.out.print(lutadorA.getNome()+ "foi derrotado e saiu da arena");
+                    ladoA.remove(lutadorA); // Tira o lutador derrotado da lista do Jogado
+                }
+                
+                if(!lutadorB.toVivoGarai()){
+                    System.out.print(lutadorB.getNome()+ "foi derrotado e saiu da arena");
+                    ladoB.remove(lutadorB); // Tira o lutador derrotado da lista do Jogador
+                }
 
-            if (lutadorB.toVivoGarai()) {
-        // Se a vida for menor que 30% do total (ajuste esse número como preferir)
-        if (lutadorB.getVida() < 30) { 
-        System.out.println(lutadorB.getNome() + " está acuado e decide se curar! ");
-        lutadorB.curar(); 
-        } else {
-                System.out.println(lutadorB.getNome() + " parte para o ataque! ");
-                lutadorB.atacar(lutadorA);
-                     }
-    }
-        }
+
+                  
+                }
+            if(ladoA.isEmpty()){
+                JOptionPane.showMessageDialog(null, "O Lado B venceu o Grande Torneio!");
+            } else{
+                JOptionPane.showMessageDialog(null, "O Lado A venceu o Grande Torneio! ");             
+                }
         
-    }
+            }
 
 
 
