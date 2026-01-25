@@ -102,17 +102,19 @@ public class arena {
                     // Esse equals nada mais é que um comparador, mas em vez do "==" do java que compara endereços
                     // o "equals" compara conteúdos
                     if (acao.equals("1")) {
-                             lutadorA.atacar(lutadorB); ⚔️
+                             lutadorA.atacar(lutadorB); 
+                             JOptionPane.showMessageDialog(null, lutadorA.getNome() + " atacou " + lutadorB.getNome() + "!");
                         } else {
-                             lutadorA.curar(); 🧪
+                             lutadorA.curar(); 
+                             JOptionPane.showMessageDialog(null, lutadorA.getNome() + " usou uma poção de cura!");
                                     }
                     if (lutadorB.toVivoGarai()) {
                        // Se a vida for menor que 30% do total (ajuste esse número como preferir)
                           if (lutadorB.getVida() < 30) { 
-                                System.out.println(lutadorB.getNome() + " está acuado e decide se curar! ");
+                                JOptionPane.showMessageDialog(null, lutadorB.getNome() + " cura-se! ");      
                                 lutadorB.curar(); 
                         } else {
-                                System.out.println(lutadorB.getNome() + " parte para o ataque! ");
+                                JOptionPane.showMessageDialog(null, lutadorB.getNome() + " parte para o ataque! ");                               
                                 lutadorB.atacar(lutadorA);
                                      } 
                                 }
@@ -147,3 +149,4 @@ public class arena {
         a.telinha();
     }
 }
+
