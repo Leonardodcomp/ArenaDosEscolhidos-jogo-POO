@@ -37,5 +37,18 @@ public class Arcanista extends Combatente {
         this.qtdd-=1;//alterar a quantidade de arcanistas para jogar.
         this.estus = 2;
     }
+
+    //Métodos get
+    public int getMana(){
+        return mana;
+    }
+
+    public int getQtdd(){
+        return qtdd;
+    }
+
+    public String getNome(){
+        return nome;
+    }
     
 }
