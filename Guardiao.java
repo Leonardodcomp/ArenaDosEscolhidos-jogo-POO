@@ -43,4 +43,17 @@ public class Guardiao extends Combatente {
 
         alvo.receberDano(dano);
     }
+
+    //Métodos get
+    public int getQtdd(){
+        return qtdd;
+    }
+
+    public int getVigor(){
+        return vigor;
+    }
+
+    public String getNome(){
+        return nome;
+    }
 }
