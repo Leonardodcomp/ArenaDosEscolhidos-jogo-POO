@@ -86,28 +86,44 @@ public class arena {
     // ou seja, qual ação o jogador tomará? Atacar ou defender? Assim como um IA para o adversário
     public void Ciclo_Turnos(){
         Random gerador1 = new Random();
+        int numero_rodadas = 0;
         //Esse primeiro loop abaixo acontecerá até ambos os lados estarem sem jogadores, a fim de definir o vencedor.
             while(!ladoA.isEmpty() && !ladoB.isEmpty()){
-                // Uma caixa de diálogo JOption exibida que pergunta ao usuário qual jogador ele quer em campo.
-                String input = JOptionPane.showInputDialog("Digite a posiçào do combatente que irá ao combate agora");
-                int numero_combatente = Integer.parseInt(input);
-                // Ao ser selecionada o jogador que irá a combate, a lógica abaixo realiza essa operação e replica a posição
+                int numero_combatente = 0;
+                numero_rodadas++;
+                while(numero_combatente<=0 || numero_combatente > ladoA.size()){
+                    // Uma caixa de diálogo JOption exibida que pergunta ao usuário qual jogador ele quer em campo.
+                   try{
+                       String input = JOptionPane.showInputDialog("Digite a posiçào do combatente que irá ao combate agora");
+                       if (input == null) {
+                       numero_combatente = 0;
+                       continue; // Isso aqui é pra caso o usuário clique em cancelar para o jogor não crashar
+                            }
+                      numero_combatente = Integer.parseInt(input);
+                          } catch (NumberFormatException e){
+                                  System.out.print("Tente digitar um número válido"); 
+                                  numero_combatente = 0; 
+                                                        }
+                         }
+                    // Ao ser selecionada o jogador que irá a combate, a lógica abaixo realiza essa operação e replica a posição
                 // escolhida pelo jogador para o adversário
                 Combatente lutadorA = ladoA.get(numero_combatente - 1);
                 Combatente lutadorB = ladoB.get(gerador1.nextInt(ladoB.size()));
                 // Abaixo está o loop que se repetirá até que algum dos dois bonecos morram em combate
                 while (lutadorA.toVivoGarai() == true && lutadorB.toVivoGarai() == true){
                     // Caixa de diálogo que perguntará qual ação o jogador tomará, atacar ou se curar?
-                    String acao = JOptionPane.showInputDialog("Lutador"+ lutadorA.getNome() + "\n1 - Atacar \n2 Curar")
+                    String acao = JOptionPane.showInputDialog("Lutador"+ lutadorA.getNome() + "\n1 - Atacar \n2 Curar");
                     // Esse equals nada mais é que um comparador, mas em vez do "==" do java que compara endereços
                     // o "equals" compara conteúdos
-                    if (acao.equals("1")) {
+                        if ("1".equals(acao)) {
                              lutadorA.atacar(lutadorB); 
                              JOptionPane.showMessageDialog(null, lutadorA.getNome() + " atacou " + lutadorB.getNome() + "!");
-                        } else {
+                        } else if("2".equals(acao)) {
                              lutadorA.curar(); 
                              JOptionPane.showMessageDialog(null, lutadorA.getNome() + " usou uma poção de cura!");
-                                    }
+                             }else {
+                                JOptionPane.showMessageDialog(null, "Ação inválida!");
+                             }
                     if (lutadorB.toVivoGarai()) {
                        // Se a vida for menor que 30% do total (ajuste esse número como preferir)
                           if (lutadorB.getVida() < 30) { 
@@ -121,12 +137,12 @@ public class arena {
                 }
 
                 if(!lutadorA.toVivoGarai()){
-                    System.out.print(lutadorA.getNome()+ "foi derrotado e saiu da arena");
+                    System.out.print(lutadorA.getNome()+ " foi derrotado e saiu da arena");
                     ladoA.remove(lutadorA); // Tira o lutador derrotado da lista do Jogado
                 }
                 
                 if(!lutadorB.toVivoGarai()){
-                    System.out.print(lutadorB.getNome()+ "foi derrotado e saiu da arena");
+                    System.out.print(lutadorB.getNome()+ " foi derrotado e saiu da arena");
                     ladoB.remove(lutadorB); // Tira o lutador derrotado da lista do Jogador
                 }
 
@@ -134,9 +150,9 @@ public class arena {
                   
                 }
             if(ladoA.isEmpty()){
-                JOptionPane.showMessageDialog(null, "O Lado B venceu o Grande Torneio!");
+                JOptionPane.showMessageDialog(null, "O Lado B venceu o Grande Torneio em "+ numero_rodadas + " !");
             } else{
-                JOptionPane.showMessageDialog(null, "O Lado A venceu o Grande Torneio! ");             
+                JOptionPane.showMessageDialog(null, "O Lado A venceu o Grande Torneio "+ numero_rodadas + " !");             
                 }
         
             }
