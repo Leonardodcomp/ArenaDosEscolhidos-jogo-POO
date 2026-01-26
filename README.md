@@ -8,4 +8,4 @@ Observações iniciais:
 2- Para integrar um RPG usual, estamos usando a biblioteca java.util.Random para usar o método random.nextInt(), esse terá a função de dado, ajudando nos calculos de probabilidade
 
 
-Integrantes: Leonardo Souza Silva, Alan Cristian de Jesus Dias, Gabriel de Sena Barbosa, Jefersandro Vieira Silva, Joao Pedro Andrade Sa Gonzaga
+Integrantes(5): Leonardo Souza Silva, Alan Cristian de Jesus Dias, Gabriel de Sena Barbosa, Jefersandro Vieira Silva, Joao Pedro Andrade Sa Gonzaga
