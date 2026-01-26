@@ -4,8 +4,8 @@ import java.util.ArrayList; // Importação usada na geração das listas de com
 import java.util.Random; // Importação usada na parte de geração de números aleatórios para distribuição de combatentes para a classe B
 
 public class arena {
-    private ArrayList<Combatente> LadoA = new ArrayList<>(); // Como o jogo terá vários guerreiros por partida, necessitamos dá criação de listas com esses guerreiros de modo a alterná-los durante a partida
-    private ArrayList<Combatente> LadoB = new ArrayList<>();
+    private ArrayList<Combatente> ladoA = new ArrayList<>(); // Como o jogo terá vários guerreiros por partida, necessitamos dá criação de listas com esses guerreiros de modo a alterná-los durante a partida
+    private ArrayList<Combatente> ladoB = new ArrayList<>();
 
     
     public void telinha() {
