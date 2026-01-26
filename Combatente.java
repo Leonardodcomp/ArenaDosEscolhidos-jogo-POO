@@ -45,11 +45,9 @@ public abstract class Combatente{
         }
     }
 
-    // Logica booleana para verificar se o combatente está vivo (Usar depois talvez?)
+    // Logica booleana para verificar se o combatente está vivo
     public boolean toVivoGarai() {
         return this.vida > 0;
     }
-
-    // Usar nome da pessoa ou deixar predefinido?
 
 }
