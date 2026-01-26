@@ -32,4 +32,13 @@ public class Cacador extends Combatente {
         this.qtdd-=1;//alterar a quantidade de caçadores para jogar.
         this.estus = 2;
     }
+
+    //Métodos get
+    public int getQtdd(){
+        return qtdd;
+    }
+
+    public String getNome(){
+        return nome;
+    }
 }
