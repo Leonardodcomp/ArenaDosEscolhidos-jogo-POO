@@ -40,15 +40,15 @@ public class Arcanista extends Combatente {
 
     //Métodos get
     public int getMana(){
-        return mana;
+        return this.mana;
     }
 
     public int getQtdd(){
-        return qtdd;
+        return this.qtdd;
     }
 
     public String getNome(){
-        return nome;
+        return this.nome;
     }
     
 }
