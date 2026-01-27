@@ -50,4 +50,23 @@ public abstract class Combatente{
         return this.vida > 0;
     }
 
+    //Métodos get
+
+    public int getVida(){
+        return this.vida;
+    }
+
+    public int getVidaMaxima(){
+        return this.vidaMaxima;
+    }
+
+    public Random getRandom(){
+        return this.random;
+    }
+
+    public int getEstus(){
+        return this.estus;
+    }
+
+
 }
