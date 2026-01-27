@@ -35,10 +35,10 @@ public class Cacador extends Combatente {
 
     //Métodos get
     public int getQtdd(){
-        return qtdd;
+        return this.qtdd;
     }
 
     public String getNome(){
-        return nome;
+        return this.nome;
     }
 }
