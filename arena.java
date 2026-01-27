@@ -164,5 +164,13 @@ public class arena {
         arena a = new arena();//é aqui que irá fixar rodando o game.
         a.telinha();
     }
-}
 
+    //Metodos get
+    public ArrayList<Combatente> getLadoA(){
+        return this.ladoA;
+    }
+
+    public ArrayList<Combatente> getLadoB(){
+        return this.ladoB;
+    }
+}
