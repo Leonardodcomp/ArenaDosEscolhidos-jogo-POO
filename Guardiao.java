@@ -46,14 +46,14 @@ public class Guardiao extends Combatente {
 
     //Métodos get
     public int getQtdd(){
-        return qtdd;
+        return this.qtdd;
     }
 
     public int getVigor(){
-        return vigor;
+        return this.vigor;
     }
 
     public String getNome(){
-        return nome;
+        return this.nome;
     }
 }
