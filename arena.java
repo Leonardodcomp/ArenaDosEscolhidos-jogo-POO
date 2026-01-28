@@ -40,34 +40,70 @@ public class arena {
 
         try{ // Aqui colocamos em prática alguns conceitos que, inclusive, foram passados em sala de aula pelo professor a fim de evitar erros por mau uso durante o jogo
             String input = JOptionPane.showInputDialog("Quantos Arcanistas no Lado A?"); // Aqui, uma janela JOption que pergunta ao usuário quantos combatentes ele quer dessa determinada classe
-            qtd1 = (input == null) ? 0 : Integer.parseInt(input);} catch(NumberFormatException e) { // Nessa linha, usamos terário para verificar se a caixa está vazia e, nesse  caso, atribuir 0 ou o número digitado pelo usuário. Além disso, possibilita testar se o usuário colocou número e não letra ou simbolos, indo para uma possível alternativa com o catch
+            if (input == null){
+                qtd1 =0;
+            }else{
+                if (Integer.parseInt(input)>0){// para não permitir números negativos.
+                    qtd1 = Integer.parseInt(input);
+                }else{
+                    qtd1 = Integer.parseInt("q231");// para gerar um erro.
+                }
+            }
+        }catch(NumberFormatException e) { // Nessa linha, usamos terário para verificar se a caixa está vazia e, nesse  caso, atribuir 0 ou o número digitado pelo usuário. Além disso, possibilita testar se o usuário colocou número e não letra ou simbolos, indo para uma possível alternativa com o catch
             JOptionPane.showMessageDialog(null, "Insira apenas numeros inteiros!"); // Aqui, o aviso de alerta
             qtd1 = 0; // Aqui precisamos colocar o 0 para que o loop não dê problema com os caracteres inseridos pelo usuário
-                }
+        }
         // Daqui em diante, o processo das linhas anteriores se repetem para as próximas classes
-        for (int i = 1; i <= qtd1; i++) {ladoA.add(new Arcanista("Arcanista " + i));}
+        for (int i = 1; i <= qtd1; i++){//gera os arcanistas.
+            String input = JOptionPane.showInputDialog("Insira o nome do arcanista:");
+            ladoA.add(new Arcanista(input));//a pessoa iá escolher o nome de cada arcanista.
+        }
         try{                                
             String input = JOptionPane.showInputDialog("Quantos Caçadores no Lado A?");
-            qtd2 = (input == null) ? 0 : Integer.parseInt(input);} catch(NumberFormatException e){ 
-            JOptionPane.showMessageDialog(null, "Insira apenas numeros inteiros!"); 
-            qtd2 = 0;
+            if (input == null){
+                qtd2 =0;
+            }else{
+                if (Integer.parseInt(input)>0){// para não permitir números negativos.
+                    qtd2 = Integer.parseInt(input);
+                }else{
+                    qtd2 = Integer.parseInt("q231");// para gerar um erro.
+                }
             }
-                                         
-        for (int i = 1; i <= qtd2; i++) {ladoA.add(new Cacador("Caçador" + i));}
+        }catch(NumberFormatException e) { // Nessa linha, usamos terário para verificar se a caixa está vazia e, nesse  caso, atribuir 0 ou o número digitado pelo usuário. Além disso, possibilita testar se o usuário colocou número e não letra ou simbolos, indo para uma possível alternativa com o catch
+            JOptionPane.showMessageDialog(null, "Insira apenas numeros inteiros!"); // Aqui, o aviso de alerta
+            qtd2 = 0; // Aqui precisamos colocar o 0 para que o loop não dê problema com os caracteres inseridos pelo usuário
+        }
+        for (int i = 1; i <= qtd2; i++){//gera os arcanistas.
+            String input = JOptionPane.showInputDialog("Insira o nome do caçador:");
+            ladoA.add(new Cacador(input));//a pessoa iá escolher o nome de cada cacador.
+        }
         try{                                 
             String input = JOptionPane.showInputDialog("Quantos Guardiões no Lado A?");
-            qtd3 = (input == null) ? 0 : Integer.parseInt(input);
-        } catch(NumberFormatException e) {   
+            if (input == null){
+                qtd3 =0;
+            }else{
+                if (Integer.parseInt(input)>0){// para não permitir números negativos.
+                    qtd3 = Integer.parseInt(input);
+                }else{
+                    qtd3 = Integer.parseInt("q231");// para gerar um erro.
+                }
+            }
+        }catch(NumberFormatException e) {   
             JOptionPane.showMessageDialog(null, "Insira apenas numeros inteiros!"); 
             qtd3 = 0; 
         }                              
-        for (int i = 1; i <= qtd3; i++) {ladoA.add(new Guardiao("Guardiao" + i));}
+        for (int i = 1; i <= qtd3; i++){//gera os arcanistas.
+            String input = JOptionPane.showInputDialog("Insira o nome do caçador:");
+            ladoA.add(new Guardiao(input));//a pessoa iá escolher o nome de cada cacador.
+        }// as linhas acima geram todos os personagens que o jogador escolher.
+
+
         /* Agora com a quantidade de combatentes  do ladoA gerado, basta que a gente some as quantidades e crie um loop para preencher o ladoB com a mesma quantidade total de combatentes, mas distribuição aleatória.*/
         quantidade_B = qtd1+qtd2+qtd3;
         Random gerador = new Random(); // Objeto para sortear os números
         
 
-        for (int i = 1; i <= quantidade_B; i++){
+        for (int i = 1; i <= quantidade_B; i++){//aqui ele vai gerar todos o time inimigo
             int escolha = gerador.nextInt(3); // Essa linha de comendo permite que sejam gerados números que vão de 0 a 2
             // Abaixo, temos estruturas condicionais que, a partir do números gerados aleatoriamente, permite escolher de qual classe será o próximo combatente
             if(escolha == 0){
@@ -77,9 +113,7 @@ public class arena {
             } else{
                  ladoB.add(new Cacador("Inimigo Cacador" + i));
             }
-            
         }
-        
     }
 
     // Aqui uma parte importante do código que definirá os turnos de cada jogador
@@ -93,49 +127,48 @@ public class arena {
                 numero_rodadas++;
                 while(numero_combatente<=0 || numero_combatente > ladoA.size()){
                     // Uma caixa de diálogo JOption exibida que pergunta ao usuário qual jogador ele quer em campo.
-                   try{
-                       String input = JOptionPane.showInputDialog("Digite a posiçào do combatente que irá ao combate agora");
-                       if (input == null) {
-                       numero_combatente = 0;
-                       continue; // Isso aqui é pra caso o usuário clique em cancelar para o jogor não crashar
-                            }
-                      numero_combatente = Integer.parseInt(input);
-                          } catch (NumberFormatException e){
-                                  System.out.print("Tente digitar um número válido"); 
-                                  numero_combatente = 0; 
-                                                        }
-                         }
+                    try{
+                        String input = JOptionPane.showInputDialog("Digite a posiçào do combatente que irá ao combate agora");
+                        if (input == null) {
+                        numero_combatente = 0;
+                        continue; // Isso aqui é pra caso o usuário clique em cancelar para o jogor não crashar
+                    }
+                    numero_combatente = Integer.parseInt(input);
+                        } catch (NumberFormatException e){
+                            System.out.print("Tente digitar um número válido"); 
+                            numero_combatente = 0; 
+                        }
+                    }
                     // Ao ser selecionada o jogador que irá a combate, a lógica abaixo realiza essa operação e replica a posição
-                // escolhida pelo jogador para o adversário
-                Combatente lutadorA = ladoA.get(numero_combatente - 1);
-                Combatente lutadorB = ladoB.get(gerador1.nextInt(ladoB.size()));
-                // Abaixo está o loop que se repetirá até que algum dos dois bonecos morram em combate
-                while (lutadorA.toVivoGarai() == true && lutadorB.toVivoGarai() == true){
-                    // Caixa de diálogo que perguntará qual ação o jogador tomará, atacar ou se curar?
-                    String acao = JOptionPane.showInputDialog("Lutador"+ lutadorA.getNome() + "\n1 - Atacar \n2 Curar");
-                    // Esse equals nada mais é que um comparador, mas em vez do "==" do java que compara endereços
-                    // o "equals" compara conteúdos
-                        if ("1".equals(acao)) {
+                    // escolhida pelo jogador para o adversário
+                    Combatente lutadorA = ladoA.get(numero_combatente - 1);
+                    Combatente lutadorB = ladoB.get(gerador1.nextInt(ladoB.size()));
+                    // Abaixo está o loop que se repetirá até que algum dos dois bonecos morram em combate
+                    while (lutadorA.toVivoGarai() == true && lutadorB.toVivoGarai() == true){
+                        // Caixa de diálogo que perguntará qual ação o jogador tomará, atacar ou se curar?
+                        String acao = JOptionPane.showInputDialog("Lutador"+ lutadorA.getNome() + "\n1 - Atacar \n2 Curar");
+                        // Esse equals nada mais é que um comparador, mas em vez do "==" do java que compara endereços
+                        // o "equals" compara conteúdos
+                        if("1".equals(acao)) {
                              lutadorA.atacar(lutadorB); 
                              JOptionPane.showMessageDialog(null, lutadorA.getNome() + " atacou " + lutadorB.getNome() + "!");
-                        } else if("2".equals(acao)) {
+                        }else if("2".equals(acao)) {
                              lutadorA.curar(); 
                              JOptionPane.showMessageDialog(null, lutadorA.getNome() + " usou uma poção de cura!");
-                             }else {
+                        }else{
                                 JOptionPane.showMessageDialog(null, "Ação inválida!");
-                             }
-                    if (lutadorB.toVivoGarai()) {
-                       // Se a vida for menor que 30% do total (ajuste esse número como preferir)
-                          if (lutadorB.getVida() < 30) { 
+                        }
+                        if (lutadorB.toVivoGarai()) {//verifica se ele está vivo.
+                            // Se a vida for menor que 30% do total (ajuste esse número como preferir)
+                            if (lutadorB.getVida() < 30) { 
                                 JOptionPane.showMessageDialog(null, lutadorB.getNome() + " cura-se! ");      
                                 lutadorB.curar(); 
-                        } else {
+                            } else {
                                 JOptionPane.showMessageDialog(null, lutadorB.getNome() + " parte para o ataque! ");                               
                                 lutadorB.atacar(lutadorA);
-                                     } 
-                                }
-                }
-
+                            } 
+                        }
+                    }
                 if(!lutadorA.toVivoGarai()){
                     System.out.print(lutadorA.getNome()+ " foi derrotado e saiu da arena");
                     ladoA.remove(lutadorA); // Tira o lutador derrotado da lista do Jogado
@@ -144,18 +177,14 @@ public class arena {
                 if(!lutadorB.toVivoGarai()){
                     System.out.print(lutadorB.getNome()+ " foi derrotado e saiu da arena");
                     ladoB.remove(lutadorB); // Tira o lutador derrotado da lista do Jogador
-                }
-
-
-                  
-                }
+                }  
+            }
             if(ladoA.isEmpty()){
                 JOptionPane.showMessageDialog(null, "O Lado B venceu o Grande Torneio em "+ numero_rodadas + " !");
             } else{
                 JOptionPane.showMessageDialog(null, "O Lado A venceu o Grande Torneio "+ numero_rodadas + " !");             
-                }
-        
             }
+    }
 
 
 
