@@ -1,19 +1,17 @@
 public class Guardiao extends Combatente {
-    private int qtdd;
+    
     private int vigor;
     private String nome = "Garibaldo";
 
-    public Guardiao (String name, int quantidade_guardiao) {
-        super(120); // vida bufada o homi é tank
+    public Guardiao (String name) {
+        super(120,name); // vida bufada o homi é tank
         this.vigor = 100;  // Recurso especial
         this.nome = name;
-        this.qtdd = quantidade_guardiao;
     }
 
     public void morte(String name){
         this.nome= name;
         this.vida=vidaMaxima;
-        this.qtdd-=1;//alterar a quantidade de guardiões para jogar.
         this.estus = 2; //reinicia a quantidade de estus.
     }
 
@@ -45,9 +43,6 @@ public class Guardiao extends Combatente {
     }
 
     //Métodos get
-    public int getQtdd(){
-        return this.qtdd;
-    }
 
     public int getVigor(){
         return this.vigor;
