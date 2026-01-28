@@ -8,10 +8,12 @@ public abstract class Combatente{
     protected int vida;
     protected int vidaMaxima;
     protected Random random; // Para fazer a matemática de aleatoridade
+    protected String nome;
     protected int estus = 2 ; // cada combatente terá dois Estur para se curar.
 
-    public Combatente(int vida) {
+    public Combatente(int vida, String name) {
         this.vida = vida;
+        this.nome= name;
         this.vidaMaxima = vida;
         this.random = new Random(); //Usado da biblioteca java.util.Random
     }
@@ -58,10 +60,6 @@ public abstract class Combatente{
 
     public int getVidaMaxima(){
         return this.vidaMaxima;
-    }
-
-    public Random getRandom(){
-        return this.random;
     }
 
     public int getEstus(){
