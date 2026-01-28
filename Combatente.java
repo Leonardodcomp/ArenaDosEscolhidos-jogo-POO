@@ -54,6 +54,9 @@ public abstract class Combatente{
 
     //Métodos get
 
+    public String getNome(){
+        return this.nome;
+    }
     public int getVida(){
         return this.vida;
     }
