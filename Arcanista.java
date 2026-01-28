@@ -1,13 +1,11 @@
 public class Arcanista extends Combatente {
-    private String nome = "José de Alencar";
-    private int mana;
-    private int qtdd;
 
-    public Arcanista(String name, int quantidade_arcanistas) {
-        super(60); // Teoricamente é o que da dano, então tem que ser mole
+    private int mana;
+
+    public Arcanista(String name) {
+        super(60,name); // Teoricamente é o que da dano, então tem que ser mole
         this.mana = 100;  // Mana full
         this.nome = name;
-        this.qtdd = quantidade_arcanistas;
     }
 
     @Override
@@ -31,24 +29,10 @@ public class Arcanista extends Combatente {
         }
     }
 
-    public void morte(String name){
-        this.nome= name;
-        this.vida=vidaMaxima;
-        this.qtdd-=1;//alterar a quantidade de arcanistas para jogar.
-        this.estus = 2;
-    }
 
     //Métodos get
     public int getMana(){
         return this.mana;
-    }
-
-    public int getQtdd(){
-        return this.qtdd;
-    }
-
-    public String getNome(){
-        return this.nome;
     }
     
 }
