@@ -47,8 +47,5 @@ public class Guardiao extends Combatente {
     public int getVigor(){
         return this.vigor;
     }
-
-    public String getNome(){
-        return this.nome;
-    }
+    
 }
