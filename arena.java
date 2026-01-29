@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.ArrayList; // Importação usada na geração das listas de combantes, a fim de atribuir objetos de diferentes classes em uma única lista
 import java.util.Random; // Importação usada na parte de geração de números aleatórios para distribuição de combatentes para a classe B
 
-public class arena {
+public class Arena {
     private ArrayList<Combatente> ladoA = new ArrayList<>(); // Como o jogo terá vários guerreiros por partida, necessitamos dá criação de listas com esses guerreiros de modo a alterná-los durante a partida
     private ArrayList<Combatente> ladoB = new ArrayList<>();
     private JFrame tela;//tonar o JFrame um atributo de classe.
@@ -24,7 +24,7 @@ public class arena {
     int altura  = Toolkit.getDefaultToolkit().getScreenSize().height;
 
     ImageIcon original = new ImageIcon(
-        getClass().getResource("/imagens_do_jogo/arena/fundo.jpg")
+        getClass().getResource("/imagens_do_jogo/Arena/fundo.jpg")
     );
 
     Image imagemRedimensionada = original.getImage()
@@ -60,6 +60,9 @@ public class arena {
             JOptionPane.showMessageDialog(null, "Insira apenas numeros inteiros!"); // Aqui, o aviso de alerta
             qtd1 = 0; // Aqui precisamos colocar o 0 para que o loop não dê problema com os caracteres inseridos pelo usuário
         }
+
+
+
         // Daqui em diante, o processo das linhas anteriores se repetem para as próximas classes
         for (int i = 1; i <= qtd1; i++){//gera os arcanistas.
             String input = JOptionPane.showInputDialog("Insira o nome do arcanista:");
@@ -100,8 +103,8 @@ public class arena {
             qtd3 = 0; 
         }                              
         for (int i = 1; i <= qtd3; i++){//gera os arcanistas.
-            String input = JOptionPane.showInputDialog("Insira o nome do caçador:");
-            ladoA.add(new Guardiao(input));//a pessoa iá escolher o nome de cada cacador.
+            String input = JOptionPane.showInputDialog("Insira o nome do Guardião:");
+            ladoA.add(new Guardiao(input));//a pessoa iá escolher o nome de cada guardião.
         }// as linhas acima geram todos os personagens que o jogador escolher.
 
 
@@ -255,7 +258,7 @@ public class arena {
     }
 
     public static void main(String[] args){//é aqui que a porca torce o rabo.
-        arena a = new arena();//é aqui que irá fixar rodando o game.
+        Arena a = new Arena();//é aqui que irá fixar rodando o game.
         a.telinha();
         a.InicializarTimes();
         a.Ciclo_Turnos();
