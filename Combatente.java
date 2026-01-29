@@ -21,6 +21,12 @@ public abstract class Combatente{
     // Metodo abstract porque a classe filha que diz como ataca
     public abstract void atacar(Combatente alvo);
 
+    //método para imprimir o personagem na tela. para fazer o polimorfismo nas outrsa classes.
+    public abstract void imprimir();
+
+    //método para remover o personagem na tela. para fazer o polimorfismo nas outrsa classes.
+    public abstract void remover();
+
 
     // Logica base de como o combatente recebe dano
     public void curar(){
@@ -38,14 +44,8 @@ public abstract class Combatente{
         }
     }
 
-    public void receberDano(int dano) {
-        this.vida -= dano;
-        if (this.vida < 0){
-            this.vida = 0;
-        }else{
-            System.out.println("você recebeu " + dano + " de dano. Vida restante: " + this.vida);
-        }
-    }
+    
+    public abstract void receberDano(int dano);
 
     // Logica booleana para verificar se o combatente está vivo
     public boolean toVivoGarai() {
