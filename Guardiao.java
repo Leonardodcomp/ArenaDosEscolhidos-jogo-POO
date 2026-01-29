@@ -1,18 +1,20 @@
+import javax.swing.*;
+
 public class Guardiao extends Combatente {
     
     private int vigor;
-    private String nome = "Garibaldo";
+    private JLabel lutador;//é aqui que estará guardada a imagem do lutador para imprimir na tela.
 
     public Guardiao (String name) {
         super(120,name); // vida bufada o homi é tank
         this.vigor = 100;  // Recurso especial
-        this.nome = name;
+        this.tipo = "Guardiao";
     }
 
-    public void morte(String name){
-        this.nome= name;
-        this.vida=vidaMaxima;
-        this.estus = 2; //reinicia a quantidade de estus.
+    public JLabel imprimir(){
+        ImageIcon persona = new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_parado.png"));
+        this.lutador = new JLabel(persona);
+        return this.lutador;
     }
 
     @Override
@@ -27,9 +29,11 @@ public class Guardiao extends Combatente {
             vigor -= 10;
             System.out.println(this.nome + " BLOQUEOU o ataque com seu escudo! (Bate na massa, nego!)");
         } else {
-            super.receberDano(dano); // Se não bloqueou, o homi ta fraco, toma dano igual gente
+            this.vida-=dano; // Se não bloqueou, o homi ta fraco, toma dano igual gente
         }
     }
+
+
 
     @Override
     public void atacar(Combatente alvo) {
@@ -47,5 +51,4 @@ public class Guardiao extends Combatente {
     public int getVigor(){
         return this.vigor;
     }
-    
 }
