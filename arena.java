@@ -225,6 +225,10 @@ public class arena {
                     }
                 if(!lutadorA.toVivoGarai()){//remove o lutador do meu time se estiver com vida igua a 0.
                     System.out.print(lutadorA.getNome()+ " foi derrotado e saiu da arena");
+                    try {// apenas para realizar uma pausa de um segundo 
+                        //prompt : como dar uma pausa entre uma linha e outra no java
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {}
                     ladoA.remove(lutadorA); // Tira o lutador derrotado da lista do Jogado
                     fundo.remove(img_lutadorA);
                     fundo.revalidate();
@@ -233,6 +237,10 @@ public class arena {
                 
                 if(!lutadorB.toVivoGarai()){//remove o lutador do time adversário se estiver com vida igua a 0.
                     System.out.print(lutadorB.getNome()+ " foi derrotado e saiu da arena");
+                    try {// apenas para realizar uma pausa de um segundo 
+                        //prompt : como dar uma pausa entre uma linha e outra no java
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {}
                     ladoB.remove(lutadorB); // Tira o lutador derrotado da lista do Jogador
                     fundo.remove(img_lutadorB);
                     fundo.revalidate();
