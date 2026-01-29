@@ -19,7 +19,7 @@ public class arena {
     int altura  = Toolkit.getDefaultToolkit().getScreenSize().height;
 
     ImageIcon original = new ImageIcon(
-        getClass().getResource("/imagens_do_jogo/arena/fundo.png")
+        getClass().getResource("imagens_do_jogo/arena/fundo.jpg")
     );
 
     Image imagemRedimensionada = original.getImage()
@@ -169,12 +169,12 @@ public class arena {
                             } 
                         }
                     }
-                if(!lutadorA.toVivoGarai()){
+                if(!lutadorA.toVivoGarai()){//remove o lutador do meu time se estiver com vida igua a 0.
                     System.out.print(lutadorA.getNome()+ " foi derrotado e saiu da arena");
                     ladoA.remove(lutadorA); // Tira o lutador derrotado da lista do Jogado
                 }
                 
-                if(!lutadorB.toVivoGarai()){
+                if(!lutadorB.toVivoGarai()){//remove o lutador do time adversário se estiver com vida igua a 0.
                     System.out.print(lutadorB.getNome()+ " foi derrotado e saiu da arena");
                     ladoB.remove(lutadorB); // Tira o lutador derrotado da lista do Jogador
                 }  
@@ -186,12 +186,11 @@ public class arena {
             }
     }
 
-
-
-    
-    public static void main(String[] args){
+    public static void main(String[] args){//é aqui que a porca torce o rabo.
         arena a = new arena();//é aqui que irá fixar rodando o game.
         a.telinha();
+        a.InicializarTimes();
+        a.Ciclo_Turnos();
     }
 
     //Metodos get
