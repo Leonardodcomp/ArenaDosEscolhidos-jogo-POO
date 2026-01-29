@@ -67,6 +67,8 @@ public abstract class Combatente{
         return this.estus;
     }
 
-    public abstract String getTipo();
+    public String getTipo(){
+        return this.tipo;
+    }
 
 }
