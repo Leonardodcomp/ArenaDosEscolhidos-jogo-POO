@@ -6,11 +6,13 @@ import java.util.Random; // Importação usada na parte de geração de números
 public class arena {
     private ArrayList<Combatente> ladoA = new ArrayList<>(); // Como o jogo terá vários guerreiros por partida, necessitamos dá criação de listas com esses guerreiros de modo a alterná-los durante a partida
     private ArrayList<Combatente> ladoB = new ArrayList<>();
+    private JFrame tela;//tonar o JFrame um atributo de classe.
+    private JLabel fundo;//
 
     
-    public void telinha() {
+    public void telinha() {//aqui só serve para deixar claro qual é o fundo do jogo e deixar claro que tembém há um JFrame.
 
-    JFrame tela = new JFrame("Malucos por RPG!");
+    tela = new JFrame("Malucos por RPG!");
     tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
     tela.setUndecorated(true);
     tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,10 +26,11 @@ public class arena {
 
     Image imagemRedimensionada = original.getImage()
                 .getScaledInstance(largura, altura, Image.SCALE_SMOOTH);
-    JLabel fundo = new JLabel(new ImageIcon(imagemRedimensionada));
 
-        tela.setContentPane(fundo);
-        tela.setVisible(true);
+    fundo = new JLabel(new ImageIcon(imagemRedimensionada));
+
+    tela.setContentPane(fundo);
+    tela.setVisible(true);
     }
 
     public void InicializarTimes(){
