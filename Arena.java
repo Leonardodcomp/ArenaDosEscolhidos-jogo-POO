@@ -221,7 +221,7 @@ public class Arena {
                         }
                         if (lutadorB.toVivoGarai()) {//verifica se ele está vivo.
                             // Se a vida for menor que 30% do total (ajuste esse número como preferir)
-                            if (lutadorB.getVida() < 30) { 
+                            if (lutadorB.getVida() < 30 && lutadorB.getEstus()>0) { 
                                 JOptionPane.showMessageDialog(null, lutadorB.getNome() + " cura-se! ");      
                                 lutadorB.curar(); 
                             } else {
@@ -235,8 +235,9 @@ public class Arena {
                         //prompt : como dar uma pausa entre uma linha e outra no java
                         System.out.print(lutadorA.getNome()+ " foi derrotado e saiu da arena");
                         ladoA.remove(lutadorA); // Tira o lutador derrotado da lista do Jogado
-                        ImageIcon morte = new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_parado.png"));
+                        ImageIcon morte = new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_morto.png"));
                         this.img_lutadorA = new JLabel(morte);
+                        img_lutadorA.setBounds(300, 260, 400, 400);
                         fundo.revalidate();
                         fundo.repaint();
                         Thread.sleep(1000);
@@ -249,8 +250,9 @@ public class Arena {
                         //prompt : como dar uma pausa entre uma linha e outra no java
                         System.out.print(lutadorB.getNome()+ " foi derrotado e saiu da arena");
                         ladoB.remove(lutadorB); 
-                        ImageIcon morte = new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_parado.png"));
+                        ImageIcon morte = new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_morto.png"));
                         this.img_lutadorB = new JLabel(morte);
+                        img_lutadorB.setBounds(1230,260,400,400);
                         fundo.revalidate();
                         fundo.repaint();
                         Thread.sleep(1000);
