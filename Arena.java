@@ -207,13 +207,17 @@ public class Arena {
                         // Esse equals nada mais é que um comparador, mas em vez do "==" do java que compara endereços
                         // o "equals" compara conteúdos
                         if("1".equals(acao)) {
-                             lutadorA.atacar(lutadorB); 
-                             JOptionPane.showMessageDialog(null, lutadorA.getNome() + " atacou " + lutadorB.getNome() + "!");
+                            lutadorA.atacar(lutadorB); 
+                            JOptionPane.showMessageDialog(null, lutadorA.getNome() + " atacou " + lutadorB.getNome() + "!");
                         }else if("2".equals(acao)) {
-                             lutadorA.curar(); 
-                             JOptionPane.showMessageDialog(null, lutadorA.getNome() + " usou uma poção de cura!");
+                            lutadorA.curar();
+                            if(lutadorA.getEstus()>0){
+                                JOptionPane.showMessageDialog(null, lutadorA.getNome() + " usou uma poção de cura!");
+                            }else{
+                                JOptionPane.showMessageDialog(null, lutadorA.getNome() + " não tem mais Estus!");
+                            }
                         }else{
-                                JOptionPane.showMessageDialog(null, "Ação inválida!");
+                            JOptionPane.showMessageDialog(null, "Ação inválida!");
                         }
                         if (lutadorB.toVivoGarai()) {//verifica se ele está vivo.
                             // Se a vida for menor que 30% do total (ajuste esse número como preferir)
@@ -227,27 +231,27 @@ public class Arena {
                         }
                     }
                 if(!lutadorA.toVivoGarai()){//remove o lutador do meu time se estiver com vida igua a 0.
-                    System.out.print(lutadorA.getNome()+ " foi derrotado e saiu da arena");
                     try {// apenas para realizar uma pausa de um segundo 
                         //prompt : como dar uma pausa entre uma linha e outra no java
+                        System.out.print(lutadorA.getNome()+ " foi derrotado e saiu da arena");
+                        ladoA.remove(lutadorA); // Tira o lutador derrotado da lista do Jogado
+                        fundo.remove(img_lutadorA);
+                        fundo.revalidate();
+                        fundo.repaint();
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {}
-                    ladoA.remove(lutadorA); // Tira o lutador derrotado da lista do Jogado
-                    fundo.remove(img_lutadorA);
-                    fundo.revalidate();
-                    fundo.repaint();
                 }
                 
                 if(!lutadorB.toVivoGarai()){//remove o lutador do time adversário se estiver com vida igua a 0.
-                    System.out.print(lutadorB.getNome()+ " foi derrotado e saiu da arena");
                     try {// apenas para realizar uma pausa de um segundo 
                         //prompt : como dar uma pausa entre uma linha e outra no java
+                        System.out.print(lutadorB.getNome()+ " foi derrotado e saiu da arena");
+                        ladoB.remove(lutadorB); // Tira o lutador derrotado da lista do Jogador
+                        fundo.remove(img_lutadorB);
+                        fundo.revalidate();
+                        fundo.repaint();
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {}
-                    ladoB.remove(lutadorB); // Tira o lutador derrotado da lista do Jogador
-                    fundo.remove(img_lutadorB);
-                    fundo.revalidate();
-                    fundo.repaint();
                 }  
             }
             if(ladoA.isEmpty()){
