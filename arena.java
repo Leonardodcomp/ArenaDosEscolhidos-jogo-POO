@@ -30,6 +30,7 @@ public class arena {
     fundo = new JLabel(new ImageIcon(imagemRedimensionada));
 
     tela.setContentPane(fundo);
+    fundo.setLayout(null);
     tela.setVisible(true);
     }
 
