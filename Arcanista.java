@@ -1,11 +1,14 @@
+import javax.swing.*;
+
 public class Arcanista extends Combatente {
 
     private int mana;
+    private JLabel lutador;//é aqui que estará guardada a imagem do lutador para imprimir na tela.
 
     public Arcanista(String name) {
         super(60,name); // Teoricamente é o que da dano, então tem que ser mole
         this.mana = 100;  // Mana full
-        this.nome = name;
+        this.tipo = "Arcanista";
     }
 
     @Override
@@ -29,10 +32,24 @@ public class Arcanista extends Combatente {
         }
     }
 
+    public JLabel imprimir(){
+        ImageIcon persona = new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_parado.png"));
+        this.lutador = new JLabel(persona);
+        return this.lutador;
+    }
+
+    public void receberDano(int dano) {
+        this.vida -= dano;
+        if (this.vida < 0){
+            this.vida = 0;
+        }else{
+            System.out.println("você recebeu " + dano + " de dano. Vida restante: " + this.vida);
+        }
+    }
+
 
     //Métodos get
     public int getMana(){
         return this.mana;
     }
-    
 }
