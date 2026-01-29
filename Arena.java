@@ -235,10 +235,12 @@ public class Arena {
                         //prompt : como dar uma pausa entre uma linha e outra no java
                         System.out.print(lutadorA.getNome()+ " foi derrotado e saiu da arena");
                         ladoA.remove(lutadorA); // Tira o lutador derrotado da lista do Jogado
-                        fundo.remove(img_lutadorA);
+                        ImageIcon morte = new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_parado.png"));
+                        this.img_lutadorA = new JLabel(morte);
                         fundo.revalidate();
                         fundo.repaint();
                         Thread.sleep(1000);
+                        fundo.remove(img_lutadorA);
                     } catch (InterruptedException e) {}
                 }
                 
@@ -246,11 +248,13 @@ public class Arena {
                     try {// apenas para realizar uma pausa de um segundo 
                         //prompt : como dar uma pausa entre uma linha e outra no java
                         System.out.print(lutadorB.getNome()+ " foi derrotado e saiu da arena");
-                        ladoB.remove(lutadorB); // Tira o lutador derrotado da lista do Jogador
-                        fundo.remove(img_lutadorB);
+                        ladoB.remove(lutadorB); 
+                        ImageIcon morte = new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_parado.png"));
+                        this.img_lutadorB = new JLabel(morte);
                         fundo.revalidate();
                         fundo.repaint();
                         Thread.sleep(1000);
+                        fundo.remove(img_lutadorB);
                     } catch (InterruptedException e) {}
                 }  
             }
