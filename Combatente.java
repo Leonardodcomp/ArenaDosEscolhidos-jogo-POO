@@ -1,4 +1,5 @@
 import java.util.Random;
+import javax.swing.JLabel;
 
 public abstract class Combatente{
 
@@ -22,11 +23,7 @@ public abstract class Combatente{
     public abstract void atacar(Combatente alvo);
 
     //método para imprimir o personagem na tela. para fazer o polimorfismo nas outrsa classes.
-    public abstract void imprimir();
-
-    //método para remover o personagem na tela. para fazer o polimorfismo nas outrsa classes.
-    public abstract void remover();
-
+    public abstract JLabel imprimir();
 
     // Logica base de como o combatente recebe dano
     public void curar(){
@@ -44,7 +41,7 @@ public abstract class Combatente{
         }
     }
 
-    
+
     public abstract void receberDano(int dano);
 
     // Logica booleana para verificar se o combatente está vivo
