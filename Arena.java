@@ -203,15 +203,15 @@ public class Arena {
                     // Abaixo está o loop que se repetirá até que algum dos dois bonecos morram em combate
                     while (lutadorA.toVivoGarai() == true && lutadorB.toVivoGarai() == true){
                         // Caixa de diálogo que perguntará qual ação o jogador tomará, atacar ou se curar?
-                        String acao = JOptionPane.showInputDialog("Lutador"+ lutadorA.getNome() + "\n1 - Atacar \n2 Curar");
+                        String acao = JOptionPane.showInputDialog("Lutador"+ lutadorA.getNome() + "\n1 - Atacar \n2 - Curar");
                         // Esse equals nada mais é que um comparador, mas em vez do "==" do java que compara endereços
                         // o "equals" compara conteúdos
                         if("1".equals(acao)) {
                             lutadorA.atacar(lutadorB); 
                             JOptionPane.showMessageDialog(null, lutadorA.getNome() + " atacou " + lutadorB.getNome() + "!");
                         }else if("2".equals(acao)) {
-                            lutadorA.curar();
                             if(lutadorA.getEstus()>0){
+                                lutadorA.curar();
                                 JOptionPane.showMessageDialog(null, lutadorA.getNome() + " usou uma poção de cura!");
                             }else{
                                 JOptionPane.showMessageDialog(null, lutadorA.getNome() + " não tem mais Estus!");
