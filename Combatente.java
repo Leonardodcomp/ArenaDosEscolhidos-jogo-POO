@@ -11,6 +11,7 @@ public abstract class Combatente{
     protected Random random; // Para fazer a matemática de aleatoridade
     protected String nome;
     protected int estus = 2 ; // cada combatente terá dois Estur para se curar.
+    protected String tipo;//serve para salvar qual é o tipo de combatente.
 
     public Combatente(int vida, String name) {
         this.vida = vida;
@@ -66,5 +67,6 @@ public abstract class Combatente{
         return this.estus;
     }
 
+    public abstract String getTipo();
 
 }
