@@ -37,7 +37,7 @@ public class Cacador extends Combatente {
     }
 
     public JLabel imprimir(){
-        ImageIcon persona = new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_parado.png"));
+        ImageIcon persona = new ImageIcon(getClass().getResource("imagens_do_jogo/cacador/gangster_parado.jpg"));
         this.lutador = new JLabel(persona);
         return this.lutador;
     }
