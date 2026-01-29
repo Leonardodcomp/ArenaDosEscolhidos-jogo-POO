@@ -7,7 +7,10 @@ public class arena {
     private ArrayList<Combatente> ladoA = new ArrayList<>(); // Como o jogo terá vários guerreiros por partida, necessitamos dá criação de listas com esses guerreiros de modo a alterná-los durante a partida
     private ArrayList<Combatente> ladoB = new ArrayList<>();
     private JFrame tela;//tonar o JFrame um atributo de classe.
-    private JLabel fundo;//
+    private JLabel fundo;
+    private JLabel img_lutadorA;
+    private JLabel img_lutadorB;
+
 
     
     public void telinha() {//aqui só serve para deixar claro qual é o fundo do jogo e deixar claro que tembém há um JFrame.
@@ -21,7 +24,7 @@ public class arena {
     int altura  = Toolkit.getDefaultToolkit().getScreenSize().height;
 
     ImageIcon original = new ImageIcon(
-        getClass().getResource("imagens_do_jogo/arena/fundo.jpg")
+        getClass().getResource("/imagens_do_jogo/arena/fundo.jpg")
     );
 
     Image imagemRedimensionada = original.getImage()
@@ -136,17 +139,64 @@ public class arena {
                         if (input == null) {
                         numero_combatente = 0;
                         continue; // Isso aqui é pra caso o usuário clique em cancelar para o jogor não crashar
-                    }
-                    numero_combatente = Integer.parseInt(input);
+                        }
+                        numero_combatente = Integer.parseInt(input);
                         } catch (NumberFormatException e){
                             System.out.print("Tente digitar um número válido"); 
                             numero_combatente = 0; 
                         }
-                    }
+                }
+                    
                     // Ao ser selecionada o jogador que irá a combate, a lógica abaixo realiza essa operação e replica a posição
                     // escolhida pelo jogador para o adversário
                     Combatente lutadorA = ladoA.get(numero_combatente - 1);
                     Combatente lutadorB = ladoB.get(gerador1.nextInt(ladoB.size()));
+
+
+                    //aqui o personagem já foi selecionado. aqui que deve ser imprimido o personagem na tela;
+                    //o que o jogador escolheu.
+
+                    if ("Guardiao".equals(lutadorA.getTipo())) {//imprime o Guardião na tela.
+                        this.img_lutadorA = lutadorA.imprimir();
+                        img_lutadorA.setBounds(300, 260, 400, 400);
+                        fundo.add(img_lutadorA);
+                        fundo.revalidate();
+                        fundo.repaint();
+                    }else if ("Arcanista".equals(lutadorA.getTipo())) {//imprime o arcanista na tela.
+                        this.img_lutadorA = lutadorA.imprimir();
+                        img_lutadorA.setBounds(300, 260, 400, 400);
+                        fundo.add(img_lutadorA);
+                        fundo.revalidate();
+                        fundo.repaint();
+                    }else{//imprime o Caçador na tela.
+                        this.img_lutadorA = lutadorA.imprimir();
+                        img_lutadorA.setBounds(300, 260, 400, 400);
+                        fundo.add(img_lutadorA);
+                        fundo.revalidate();
+                        fundo.repaint();
+                    }
+
+                    //desenhar o lutador adversário.
+                    if ("Guardiao".equals(lutadorB.getTipo())) {//imprime o Guardião na tela.
+                        this.img_lutadorB = lutadorA.imprimir();
+                        img_lutadorB.setBounds(1230,260,400,400);
+                        fundo.add(img_lutadorB);
+                        fundo.revalidate();
+                        fundo.repaint();
+                    }else if ("Arcanista".equals(lutadorB.getTipo())) {//imprime o arcanista na tela.
+                        this.img_lutadorB = lutadorA.imprimir();
+                        img_lutadorB.setBounds(1230,260,400,400);
+                        fundo.add(img_lutadorB);
+                        fundo.revalidate();
+                        fundo.repaint();
+                    }else{//imprime o Caçador na tela.
+                        this.img_lutadorB = lutadorB.imprimir();
+                        img_lutadorB.setBounds(1230,260,400,400);
+                        fundo.add(img_lutadorB);
+                        fundo.revalidate();
+                        fundo.repaint();
+                    }
+
                     // Abaixo está o loop que se repetirá até que algum dos dois bonecos morram em combate
                     while (lutadorA.toVivoGarai() == true && lutadorB.toVivoGarai() == true){
                         // Caixa de diálogo que perguntará qual ação o jogador tomará, atacar ou se curar?
@@ -176,11 +226,17 @@ public class arena {
                 if(!lutadorA.toVivoGarai()){//remove o lutador do meu time se estiver com vida igua a 0.
                     System.out.print(lutadorA.getNome()+ " foi derrotado e saiu da arena");
                     ladoA.remove(lutadorA); // Tira o lutador derrotado da lista do Jogado
+                    fundo.remove(img_lutadorA);
+                    fundo.revalidate();
+                    fundo.repaint();
                 }
                 
                 if(!lutadorB.toVivoGarai()){//remove o lutador do time adversário se estiver com vida igua a 0.
                     System.out.print(lutadorB.getNome()+ " foi derrotado e saiu da arena");
                     ladoB.remove(lutadorB); // Tira o lutador derrotado da lista do Jogador
+                    fundo.remove(img_lutadorB);
+                    fundo.revalidate();
+                    fundo.repaint();
                 }  
             }
             if(ladoA.isEmpty()){
