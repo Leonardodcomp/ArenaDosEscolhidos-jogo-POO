@@ -13,4 +13,7 @@ Prompts de IA utilizados:
 --- Continuação de prompt
 1.1 - Minha tela de login está abrindo fora da aplicação java
 
+2- faça a arte do guardião 2d parado em png com essa descrição: O Guardiao de Ferro (Tanque): Soldados robustos treinados para resistir. Eles
+lutam usando armas pesadas e escudos.
+
 Integrantes(5): Leonardo Souza Silva, Alan Cristian de Jesus Dias, Gabriel de Sena Barbosa, Jefersandro Vieira Silva, Joao Pedro Andrade Sa Gonzaga
