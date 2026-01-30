@@ -17,6 +17,37 @@ public class Arena {
     private JPanel painelMenu;  //Colocamos esse atributo novo por causa do menu e da logistica de botão.
 
 
+    private void atualizarImagemLutadorA(Combatente lutador) {
+        // Remove imagem anterior, se existir.
+        if (img_lutadorA != null) {
+            fundo.remove(img_lutadorA);
+        }
+        
+        // Cria nova imagem.
+        this.img_lutadorA = lutador.imprimir();
+        if (img_lutadorA != null) {
+            img_lutadorA.setBounds(300, 260, 400, 400);
+            fundo.add(img_lutadorA);
+            fundo.revalidate();
+            fundo.repaint();
+        }
+    }
+
+    private void atualizarImagemLutadorB(Combatente lutador) {
+        // Remove imagem anterior, se existir.
+        if (img_lutadorB != null) {
+            fundo.remove(img_lutadorB);
+        }
+        
+        // Cria nova imagem.
+        this.img_lutadorB = lutador.imprimir();
+        if (img_lutadorB != null) {
+            img_lutadorB.setBounds(1230, 260, 400, 400);
+            fundo.add(img_lutadorB);
+            fundo.revalidate();
+            fundo.repaint();
+        }
+    }
     
     public void telinha() {
         tela = new JFrame("Arena dos Escolhidos!");
@@ -227,107 +258,100 @@ public class Arena {
                     // escolhida pelo jogador para o adversário
                     Combatente lutadorA = ladoA.get(numero_combatente - 1);
                     Combatente lutadorB = ladoB.get(gerador1.nextInt(ladoB.size()));
-
-
+                    
+                    
                     //aqui o personagem já foi selecionado. aqui que deve ser imprimido o personagem na tela;
                     //o que o jogador escolheu.
 
-                    if ("Guardiao".equals(lutadorA.getTipo())) {//imprime o Guardião na tela.
-                        this.img_lutadorA = lutadorA.imprimir();
-                        img_lutadorA.setBounds(300, 260, 400, 400);
-                        fundo.add(img_lutadorA);
-                        fundo.revalidate();
-                        fundo.repaint();
-                    }else if ("Arcanista".equals(lutadorA.getTipo())) {//imprime o arcanista na tela.
-                        this.img_lutadorA = lutadorA.imprimir();
-                        img_lutadorA.setBounds(300, 260, 400, 400);
-                        fundo.add(img_lutadorA);
-                        fundo.revalidate();
-                        fundo.repaint();
-                    }else{//imprime o Caçador na tela.
-                        this.img_lutadorA = lutadorA.imprimir();
-                        img_lutadorA.setBounds(300, 260, 400, 400);
-                        fundo.add(img_lutadorA);
-                        fundo.revalidate();
-                        fundo.repaint();
-                    }
+                    // Para lutadorA
+                    atualizarImagemLutadorA(lutadorA);
 
-                    //desenhar o lutador adversário.
-                    if ("Guardiao".equals(lutadorB.getTipo())) {//imprime o Guardião na tela.
-                        this.img_lutadorB = lutadorB.imprimir();
-                        img_lutadorB.setBounds(1230,260,400,400);
-                        fundo.add(img_lutadorB);
-                        fundo.revalidate();
-                        fundo.repaint();
-                    }else if ("Arcanista".equals(lutadorB.getTipo())) {//imprime o arcanista na tela.
-                        this.img_lutadorB = lutadorB.imprimir();
-                        img_lutadorB.setBounds(1230,260,400,400);
-                        fundo.add(img_lutadorB);
-                        fundo.revalidate();
-                        fundo.repaint();
-                    }else{//imprime o Caçador na tela.
-                        this.img_lutadorB = lutadorB.imprimir();
-                        img_lutadorB.setBounds(1230,260,400,400);
-                        fundo.add(img_lutadorB);
-                        fundo.revalidate();
-                        fundo.repaint();
-                    }// até aqui está tudo certo.
+                    // Para lutadorB  
+                    atualizarImagemLutadorB(lutadorB);
 
                     // Abaixo está o loop que se repetirá até que algum dos dois bonecos morram em combate
-                    while (lutadorA.toVivoGarai() == true && lutadorB.toVivoGarai() == true){
-                        // Caixa de diálogo que perguntará qual ação o jogador tomará, atacar ou se curar?
-                        String acao = JOptionPane.showInputDialog("Lutador"+ lutadorA.getNome() + "\n1 - Atacar \n2 - Curar");
-                        // Esse equals nada mais é que um comparador, mas em vez do "==" do java que compara endereços
-                        // o "equals" compara conteúdos
-                        if("1".equals(acao)) {
-                            lutadorA.atacar(lutadorB); 
+                    // Combate entre lutadorA e lutadorB
+                    while (lutadorA.toVivoGarai() && lutadorB.toVivoGarai()) {
+                        // TURNO DO JOGADOR
+                        String acao = JOptionPane.showInputDialog("Lutador " + lutadorA.getNome() + "\n1 - Atacar \n2 - Curar");
+                        
+                        if ("1".equals(acao)) {
+                            lutadorA.atacar(lutadorB);
                             JOptionPane.showMessageDialog(null, lutadorA.getNome() + " atacou " + lutadorB.getNome() + "!");
-                        }else if("2".equals(acao)) {
-                            if(lutadorA.getEstus()>0){
+                        } else if ("2".equals(acao)) {
+                            if (lutadorA.getEstus() > 0) {
                                 lutadorA.curar();
                                 JOptionPane.showMessageDialog(null, lutadorA.getNome() + " usou uma poção de cura!");
-                            }else{
+                            } else {
                                 JOptionPane.showMessageDialog(null, lutadorA.getNome() + " não tem mais Estus!");
                             }
-                        }else{
-                            JOptionPane.showMessageDialog(null, "Ação inválida!");
                         }
-                        if (lutadorB.toVivoGarai()) {//verifica se ele está vivo.
-                            // Se a vida for menor que 30% do total (ajuste esse número como preferir)
-                            if (lutadorB.getVida() < 30 && lutadorB.getEstus()>0) { 
-                                JOptionPane.showMessageDialog(null, lutadorB.getNome() + " cura-se! ");      
-                                lutadorB.curar(); 
-                            } else {
-                                JOptionPane.showMessageDialog(null, lutadorB.getNome() + " parte para o ataque! ");                               
+                        
+                        // VERIFICAR se lutadorB morreu após o ataque
+                        if (!lutadorB.toVivoGarai()) {
+                            break; // Sai imediatamente do combate
+                        }
+                        
+                        // TURNO DO INIMIGO (só se ainda estiver vivo)
+                        if (lutadorB.toVivoGarai() && lutadorA.toVivoGarai()) {
+                            if (lutadorB.getVida() < 30 && lutadorB.getEstus() > 0) {
+                                JOptionPane.showMessageDialog(null, lutadorB.getNome() + " cura-se!");
+                                lutadorB.curar();
+                            } else if (lutadorA.toVivoGarai()) { // Só ataca se A estiver vivo
+                                JOptionPane.showMessageDialog(null, lutadorB.getNome() + " parte para o ataque!");
                                 lutadorB.atacar(lutadorA);
-                            } 
+                            }
+                        }
+                        
+                        // VERIFICAR se lutadorA morreu após contra-ataque
+                        if (!lutadorA.toVivoGarai()) {
+                            break; // Sai imediatamente do combate
                         }
                     }
-                if(!lutadorA.toVivoGarai()){//remove o lutador do meu time se estiver com vida igua a 0.
-                    try {// apenas para realizar uma pausa de um segundo 
-                        //prompt : como dar uma pausa entre uma linha e outra no java
-                        System.out.print(lutadorA.getNome()+ " foi derrotado e saiu da arena");
-                        ladoA.remove(lutadorA); // Tira o lutador derrotado da lista do Jogado
-                        fundo.remove(img_lutadorA);
-                        fundo.revalidate();
-                        fundo.repaint();
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {}
-                }
-                
-                if(!lutadorB.toVivoGarai()){//remove o lutador do time adversário se estiver com vida igua a 0.
-                    try {// apenas para realizar uma pausa de um segundo 
-                        //prompt : como dar uma pausa entre uma linha e outra no java
-                        ladoB.remove(lutadorB); 
-                        int psc_inimiga = new Random().nextInt(ladoB.size());
-                        System.out.print(lutadorB.getNome()+ " foi derrotado e saiu da arena");
-                        fundo.remove(img_lutadorB);
-                        fundo.revalidate();
-                        fundo.repaint();
-                        Thread.sleep(1000);
-                        lutadorB = ladoB.get(psc_inimiga);
-                    } catch (InterruptedException e) {}
-                }  
+                    if(!lutadorA.toVivoGarai()){
+                        try {
+                            System.out.print(lutadorA.getNome() + " foi derrotado e saiu da arena");
+                            ladoA.remove(lutadorA);
+                            
+                            // Remove imagem corretamente
+                            if (img_lutadorA != null) {
+                                fundo.remove(img_lutadorA);
+                                img_lutadorA = null; // Importante para não reutilizar
+                            }
+                            
+                            fundo.revalidate();
+                            fundo.repaint();
+                            Thread.sleep(1000);// uma pausa de 1 segundo entre a morte e escolha de novo personagem.
+                        } catch (InterruptedException e) {}
+                    }
+
+                    if(!lutadorB.toVivoGarai()){
+                        try {
+                            ladoB.remove(lutadorB); 
+                            System.out.print(lutadorB.getNome() + " foi derrotado e saiu da arena");
+                            
+                            // Remove imagem do lutador morto
+                            if (img_lutadorB != null) {
+                                fundo.remove(img_lutadorB);
+                                img_lutadorB = null;
+                            }
+                            fundo.revalidate();
+                            fundo.repaint();
+                            Thread.sleep(1000);
+                            
+                            // VERIFICA se ainda há inimigos antes de pegar um novo
+                            if (!ladoB.isEmpty()) {
+                                int psc_inimiga = new Random().nextInt(ladoB.size());
+                                lutadorB = ladoB.get(psc_inimiga);
+                                
+                                // ATUALIZA a imagem do novo lutadorB
+                                atualizarImagemLutadorB(lutadorB);
+                            } else {
+                                // Não há mais inimigos, jogo acaba
+                                break;
+                            }
+                        } catch (InterruptedException e) {}
+                    }  
             }
             if(ladoA.isEmpty()){
                 JOptionPane.showMessageDialog(null, "O Lado B venceu o Grande Torneio em "+ numero_rodadas + " !");
