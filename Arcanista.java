@@ -33,7 +33,7 @@ public class Arcanista extends Combatente {
     }
 
     public JLabel imprimir(){
-        ImageIcon persona = new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_parado.png"));
+        ImageIcon persona = new ImageIcon(getClass().getResource("imagens_do_jogo/mage/mago_parado.png"));
         this.lutador = new JLabel(persona);
         return this.lutador;
     }
