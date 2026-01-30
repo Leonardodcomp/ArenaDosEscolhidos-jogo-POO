@@ -15,7 +15,7 @@ public class Arena {
     
     public void telinha() {//aqui só serve para deixar claro qual é o fundo do jogo e deixar claro que tembém há um JFrame.
 
-    tela = new JFrame("Malucos por RPG!");
+    tela = new JFrame("Arena dos Escolhidos!");
     tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
     tela.setUndecorated(true);
     tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
