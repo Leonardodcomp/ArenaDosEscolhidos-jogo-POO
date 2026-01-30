@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList; // Importação usada na geração das listas de combantes, a fim de atribuir objetos de diferentes classes em uma única lista
 import java.util.Random; // Importação usada na parte de geração de números aleatórios para distribuição de combatentes para a classe B
-
+import java.util.function.LongUnaryOperator;
 // Os dois ultimos métodos a seguir são necessários para implementar botão no jogo
 import java.awt.event.ActionEvent; 
 import java.awt.event.ActionListener;
@@ -254,13 +254,13 @@ public class Arena {
 
                     //desenhar o lutador adversário.
                     if ("Guardiao".equals(lutadorB.getTipo())) {//imprime o Guardião na tela.
-                        this.img_lutadorB = lutadorA.imprimir();
+                        this.img_lutadorB = lutadorB.imprimir();
                         img_lutadorB.setBounds(1230,260,400,400);
                         fundo.add(img_lutadorB);
                         fundo.revalidate();
                         fundo.repaint();
                     }else if ("Arcanista".equals(lutadorB.getTipo())) {//imprime o arcanista na tela.
-                        this.img_lutadorB = lutadorA.imprimir();
+                        this.img_lutadorB = lutadorB.imprimir();
                         img_lutadorB.setBounds(1230,260,400,400);
                         fundo.add(img_lutadorB);
                         fundo.revalidate();
@@ -271,7 +271,7 @@ public class Arena {
                         fundo.add(img_lutadorB);
                         fundo.revalidate();
                         fundo.repaint();
-                    }
+                    }// até aqui está tudo certo.
 
                     // Abaixo está o loop que se repetirá até que algum dos dois bonecos morram em combate
                     while (lutadorA.toVivoGarai() == true && lutadorB.toVivoGarai() == true){
@@ -308,28 +308,24 @@ public class Arena {
                         //prompt : como dar uma pausa entre uma linha e outra no java
                         System.out.print(lutadorA.getNome()+ " foi derrotado e saiu da arena");
                         ladoA.remove(lutadorA); // Tira o lutador derrotado da lista do Jogado
-                        ImageIcon morte = new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_morto.png"));
-                        this.img_lutadorA = new JLabel(morte);
-                        img_lutadorA.setBounds(300, 260, 400, 400);
+                        fundo.remove(img_lutadorA);
                         fundo.revalidate();
                         fundo.repaint();
                         Thread.sleep(1000);
-                        fundo.remove(img_lutadorA);
                     } catch (InterruptedException e) {}
                 }
                 
                 if(!lutadorB.toVivoGarai()){//remove o lutador do time adversário se estiver com vida igua a 0.
                     try {// apenas para realizar uma pausa de um segundo 
                         //prompt : como dar uma pausa entre uma linha e outra no java
-                        System.out.print(lutadorB.getNome()+ " foi derrotado e saiu da arena");
                         ladoB.remove(lutadorB); 
-                        ImageIcon morte = new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_morto.png"));
-                        this.img_lutadorB = new JLabel(morte);
-                        img_lutadorB.setBounds(1230,260,400,400);
+                        int psc_inimiga = new Random().nextInt(ladoB.size());
+                        System.out.print(lutadorB.getNome()+ " foi derrotado e saiu da arena");
+                        fundo.remove(img_lutadorB);
                         fundo.revalidate();
                         fundo.repaint();
                         Thread.sleep(1000);
-                        fundo.remove(img_lutadorB);
+                        lutadorB = ladoB.get(psc_inimiga);
                     } catch (InterruptedException e) {}
                 }  
             }
