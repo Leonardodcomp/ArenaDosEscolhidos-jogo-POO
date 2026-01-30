@@ -9,6 +9,8 @@ Observações iniciais:
 
 Prompts de IA utilizados:
 
-- 
+1- Como colocar uma tela de login simples em uma aplicação JAVA? Que bibliotecas eu preciso?
+--- Continuação de prompt
+1.1 - Minha tela de login está abrindo fora da aplicação java
 
 Integrantes(5): Leonardo Souza Silva, Alan Cristian de Jesus Dias, Gabriel de Sena Barbosa, Jefersandro Vieira Silva, Joao Pedro Andrade Sa Gonzaga

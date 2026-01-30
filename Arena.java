@@ -3,6 +3,10 @@ import java.awt.*;
 import java.util.ArrayList; // Importação usada na geração das listas de combantes, a fim de atribuir objetos de diferentes classes em uma única lista
 import java.util.Random; // Importação usada na parte de geração de números aleatórios para distribuição de combatentes para a classe B
 
+// Os dois ultimos métodos a seguir são necessários para implementar botão no jogo
+import java.awt.event.ActionEvent; 
+import java.awt.event.ActionListener;
+
 public class Arena {
     private ArrayList<Combatente> ladoA = new ArrayList<>(); // Como o jogo terá vários guerreiros por partida, necessitamos dá criação de listas com esses guerreiros de modo a alterná-los durante a partida
     private ArrayList<Combatente> ladoB = new ArrayList<>();
@@ -10,33 +14,102 @@ public class Arena {
     private JLabel fundo;
     private JLabel img_lutadorA;
     private JLabel img_lutadorB;
+    private JPanel painelMenu;  //Colocamos esse atributo novo por causa do menu e da logistica de botão.
 
 
     
-    public void telinha() {//aqui só serve para deixar claro qual é o fundo do jogo e deixar claro que tembém há um JFrame.
-
-    tela = new JFrame("Arena dos Escolhidos!");
-    tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    tela.setUndecorated(true);
-    tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    int largura = Toolkit.getDefaultToolkit().getScreenSize().width;
-    int altura  = Toolkit.getDefaultToolkit().getScreenSize().height;
-
-    ImageIcon original = new ImageIcon(
-        getClass().getResource("/imagens_do_jogo/Arena/fundo.jpg")
-    );
-
-    Image imagemRedimensionada = original.getImage()
-                .getScaledInstance(largura, altura, Image.SCALE_SMOOTH);
-
-    fundo = new JLabel(new ImageIcon(imagemRedimensionada));
-
-    tela.setContentPane(fundo);
-    fundo.setLayout(null);
-    tela.setVisible(true);
+    public void telinha() {
+        tela = new JFrame("Arena dos Escolhidos!");
+        tela.setExtendedState(JFrame.MAXIMIZED_BOTH); // Tela cheia
+        tela.setUndecorated(false);       // Jogo abre em modo janela para poder fechar no meio do jogo caso queira.
+        tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        tela.setLayout(null); // Layout nulo para posicionamento absoluto
+        
+        // Deixa a tela visível (inicialmente vazia ou preta)
+        tela.getContentPane().setBackground(Color.BLACK);
+        tela.setVisible(true);
     }
 
+    //Menuzinho pro jogo não ir direto pra gameplay
+    public void mostrarMenu() {
+
+        // Criamos um painel transparente ou preto para colocar o botão
+        painelMenu = new JPanel();
+        painelMenu.setLayout(null);
+        painelMenu.setBackground(Color.BLACK); // Fundo do menu
+        painelMenu.setBounds(0, 0, tela.getWidth(), tela.getHeight());
+
+        // Lógica do JLabel permanece
+        JLabel titulo = new JLabel("ARENA DOS ESCOLHIDOS");
+        titulo.setFont(new Font("Serif", Font.BOLD, 50));
+        titulo.setForeground(Color.WHITE);
+        titulo.setHorizontalAlignment(SwingConstants.CENTER);
+        titulo.setBounds(0, tela.getHeight()/2 - 150, tela.getWidth(), 60);
+        painelMenu.add(titulo);
+
+        // Criação e configuração do botão pra gameplay começar
+        JButton btnComecar = new JButton("COMEÇAR");
+        btnComecar.setFont(new Font("Arial", Font.BOLD, 20));
+        btnComecar.setBackground(Color.RED);
+        btnComecar.setForeground(Color.WHITE);
+
+        // Parte chata de frontend
+        int btnLargura = 200;
+        int btnAltura = 60;
+        btnComecar.setBounds((tela.getWidth() - btnLargura)/2, tela.getHeight()/2, btnLargura, btnAltura);
+
+        // Agora sim, a magia do botão, começar a gameplay!
+        btnComecar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Vai remover o metodo menu para começar
+                tela.remove(painelMenu);
+                tela.repaint();
+
+                // Inicia o jogo numa Thread separada pra evitar bugs e BOs
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        carregarCenario();  // Começa a gameplay
+                        InicializarTimes();  
+                        Ciclo_Turnos();    
+                    }
+                }).start();
+            }
+        });
+
+        painelMenu.add(btnComecar);
+        tela.add(painelMenu); // Adiciona o menu na tela
+        tela.revalidate();
+        tela.repaint();
+    }
+
+    
+    public void carregarCenario() {
+        int largura = Toolkit.getDefaultToolkit().getScreenSize().width;
+        int altura  = Toolkit.getDefaultToolkit().getScreenSize().height;
+
+        java.net.URL imgUrl = getClass().getResource("/imagens_do_jogo/Arena/fundo.jpg");
+        
+        // adicionei um tratamento de falhas (jeito burro) pra se der ruim não crachar
+        if (imgUrl != null) {
+            ImageIcon original = new ImageIcon(imgUrl);
+            Image imagemRedimensionada = original.getImage().getScaledInstance(largura, altura, Image.SCALE_SMOOTH);
+            fundo = new JLabel(new ImageIcon(imagemRedimensionada));
+        } else {
+            // Caso a imagem falhe, cria um fundo cinza para não crashar
+            fundo = new JLabel();
+            fundo.setOpaque(true);
+            fundo.setBackground(Color.DARK_GRAY);
+        }
+
+        fundo.setLayout(null);
+        
+        // Define o fundo como o conteúdo principal da tela
+        tela.setContentPane(fundo);
+        tela.revalidate(); // Atualiza a tela para mostrar a imagem
+        tela.repaint();
+    }
     public void InicializarTimes(){
         int qtd1;
         int qtd2;
@@ -267,11 +340,16 @@ public class Arena {
             }
     }
 
-    public static void main(String[] args){//é aqui que a porca torce o rabo.
-        Arena a = new Arena();//é aqui que irá fixar rodando o game.
-        a.telinha();
-        a.InicializarTimes();
-        a.Ciclo_Turnos();
+public static void main(String[] args) { //é aqui que a porca torce o rabo
+    
+        // Vi uma oportunidade massa que a IA falou pra gente: Iniciar a interface gráfica na thread do Swing
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                Arena a = new Arena(); //é aqui que irá fixar rodando o game.
+                a.telinha();      
+                a.mostrarMenu();  
+            }
+        });
     }
 
     //Metodos get
