@@ -112,7 +112,7 @@ public class Arena {
     private void LutadorB_ataque(Combatente lutador) {
     try {
         int x = 1250;
-        int y = 450;
+        int y = 400;
         // Remove imagem anterior
         if (img_lutadorB != null) {
             fundo.remove(img_lutadorB);
