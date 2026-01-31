@@ -23,9 +23,6 @@ public abstract class Combatente{
     // Metodo abstract porque a classe filha que diz como ataca
     public abstract void atacar(Combatente alvo);
 
-    //método para imprimir o personagem na tela. para fazer o polimorfismo nas outrsa classes.
-    public abstract JLabel imprimir();
-
     // Logica base de como o combatente recebe dano
     public void curar(){
         //irá curar sempre 30 pontos de vida, sem aleatoriedade. 
