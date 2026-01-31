@@ -24,7 +24,7 @@ public class Arena {
         }
         
         
-        this.img_lutadorA = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_parado.png")));
+        this.img_lutadorA = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_parado.png")));
         if (img_lutadorA != null) {
             img_lutadorA.setBounds(300, 260, 400, 400);
             fundo.add(img_lutadorA);
@@ -40,7 +40,7 @@ public class Arena {
         }
         
         // Cria nova imagem.
-        this.img_lutadorB = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_parado_invertido.png")));
+        this.img_lutadorB = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_parado_invertido.png")));
         if (img_lutadorB != null) {
             img_lutadorB.setBounds(1230, 260, 400, 400);
             fundo.add(img_lutadorB);
