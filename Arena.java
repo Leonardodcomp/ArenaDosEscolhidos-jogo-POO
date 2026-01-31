@@ -15,9 +15,11 @@ public class Arena {
     private JLabel img_lutadorA;
     private JLabel img_lutadorB;
     private JPanel painelMenu;  //Colocamos esse atributo novo por causa do menu e da logistica de botão.
+    private JLabel ataque_A;
+    private JLabel ataque_B;
 
 
-    private void LutadorA_parado(Combatente lutador) {
+    private void LutadorA_parado(Combatente lutador) {//atualizar imagem se o lutador A estiver parado.
         // Remove imagem anterior, se existir.
         if (img_lutadorA != null) {
             fundo.remove(img_lutadorA);
@@ -33,7 +35,50 @@ public class Arena {
         }
     }
 
-    private void LutadorB_parado(Combatente lutador) {
+    private void LutadorA_ataque(Combatente lutador) {
+    try {
+        // Remove imagem anterior
+        if (img_lutadorA != null) {
+            fundo.remove(img_lutadorA);
+        }
+        
+        // Cria nova imagem de ataque
+        img_lutadorA = new JLabel(new ImageIcon(getClass().getResource(
+            "imagens_do_jogo/" + lutador.getTipo() + "/" + lutador.getTipo() + "_atacando.png")));
+        
+        if (img_lutadorA != null) {
+            img_lutadorA.setBounds(300, 260, 400, 400);
+            fundo.add(img_lutadorA);
+            fundo.revalidate();
+            fundo.repaint();
+        }
+        
+        // Força atualização imediata
+        tela.repaint();
+        
+        // Pequena pausa para visualização do ataque
+        Thread.sleep(500);
+
+        if (img_lutadorA != null) {
+            fundo.remove(img_lutadorA);
+        }
+        
+        // Restaura imagem parada
+        
+        this.img_lutadorA = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_parado.png")));
+        if (img_lutadorA != null) {
+            img_lutadorA.setBounds(300, 260, 400, 400);
+            fundo.add(img_lutadorA);
+            fundo.revalidate();
+            fundo.repaint();
+        }
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void LutadorB_parado(Combatente lutador) {//atualizar imagem se o lutador B estiver parado.
         // Remove imagem anterior, se existir.
         if (img_lutadorB != null) {
             fundo.remove(img_lutadorB);
@@ -46,6 +91,46 @@ public class Arena {
             fundo.add(img_lutadorB);
             fundo.revalidate();
             fundo.repaint();
+        }
+    }
+
+    private void LutadorB_ataque(Combatente lutador) {
+    try {
+        // Remove imagem anterior
+        if (img_lutadorB != null) {
+            fundo.remove(img_lutadorB);
+        }
+        
+        // Cria nova imagem de ataque
+        img_lutadorB = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/" + lutador.getTipo() + "/" + lutador.getTipo() + "_atacando_invertido.png")));
+        
+        if (img_lutadorB != null) {
+            img_lutadorB.setBounds(1230, 260, 400, 400);
+            fundo.add(img_lutadorB);
+            fundo.revalidate();
+            fundo.repaint();
+        }
+        
+        // Força atualização imediata
+        tela.repaint();
+        
+        // Pequena pausa para visualização do ataque
+        Thread.sleep(500);
+
+        if (img_lutadorB != null) {
+            fundo.remove(img_lutadorB);
+        }
+        
+        this.img_lutadorB = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_parado_invertido.png")));
+        if (img_lutadorB != null) {
+            img_lutadorB.setBounds(1230, 260, 400, 400);
+            fundo.add(img_lutadorB);
+            fundo.revalidate();
+            fundo.repaint();
+        }
+        
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
@@ -278,6 +363,7 @@ public class Arena {
                         if ("1".equals(acao)) {
                             lutadorA.atacar(lutadorB);
                             JOptionPane.showMessageDialog(null, lutadorA.getNome() + " atacou " + lutadorB.getNome() + "!");
+                            LutadorA_ataque(lutadorA);
                         } else if ("2".equals(acao)) {
                             if (lutadorA.getEstus() > 0) {
                                 lutadorA.curar();
@@ -300,6 +386,7 @@ public class Arena {
                             } else if (lutadorA.toVivoGarai()) { // Só ataca se A estiver vivo
                                 JOptionPane.showMessageDialog(null, lutadorB.getNome() + " parte para o ataque!");
                                 lutadorB.atacar(lutadorA);
+                                LutadorB_ataque(lutadorB);
                             }
                         }
                         
