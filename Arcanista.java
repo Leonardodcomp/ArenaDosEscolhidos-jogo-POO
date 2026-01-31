@@ -1,5 +1,3 @@
-import javax.swing.*;
-
 public class Arcanista extends Combatente {
 
     private int mana;
@@ -7,7 +5,7 @@ public class Arcanista extends Combatente {
     public Arcanista(String name) {
         super(60,name); // Teoricamente é o que da dano, então tem que ser mole
         this.mana = 100;  // Mana full
-        this.tipo = "Arcanista";
+        this.tipo = "mago";
     }
 
     @Override
