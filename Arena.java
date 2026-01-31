@@ -37,6 +37,8 @@ public class Arena {
 
     private void LutadorA_ataque(Combatente lutador) {
     try {
+        int x = 500;
+        int y = 400;
         // Remove imagem anterior
         if (img_lutadorA != null) {
             fundo.remove(img_lutadorA);
@@ -55,9 +57,22 @@ public class Arena {
         
         // Força atualização imediata
         tela.repaint();
-        
+        //aqui que deve ficar a parte de pintar na tela o ataque.
+        if("cacador".equals(lutador.getTipo()) || "mago".equals(lutador.getTipo()))
+            while(x<1250){
+                try {
+                    ataque_A = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_ataque.png")));
+                    ataque_A.setBounds(x,y,150,150);
+                    fundo.add(ataque_A);
+                    fundo.revalidate();
+                    fundo.repaint();
+                    Thread.sleep(20);
+                    fundo.remove(ataque_A);
+                    x = x + 30;;
+                } catch (Exception e) {}
+            }
         // Pequena pausa para visualização do ataque
-        Thread.sleep(500);
+        Thread.sleep(200);
 
         if (img_lutadorA != null) {
             fundo.remove(img_lutadorA);
@@ -96,6 +111,8 @@ public class Arena {
 
     private void LutadorB_ataque(Combatente lutador) {
     try {
+        int x = 1250;
+        int y = 450;
         // Remove imagem anterior
         if (img_lutadorB != null) {
             fundo.remove(img_lutadorB);
@@ -113,9 +130,23 @@ public class Arena {
         
         // Força atualização imediata
         tela.repaint();
+
+        if("cacador".equals(lutador.getTipo()) || "mago".equals(lutador.getTipo()))
+            while(x>500){
+                try {
+                    ataque_B = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_ataque_invertido.png")));
+                    ataque_B.setBounds(x,y,150,150);
+                    fundo.add(ataque_B);
+                    fundo.revalidate();
+                    fundo.repaint();
+                    Thread.sleep(20);
+                    fundo.remove(ataque_B);
+                    x = x - 30;
+                } catch (Exception e) {}
+            }
         
         // Pequena pausa para visualização do ataque
-        Thread.sleep(500);
+        Thread.sleep(200);
 
         if (img_lutadorB != null) {
             fundo.remove(img_lutadorB);
