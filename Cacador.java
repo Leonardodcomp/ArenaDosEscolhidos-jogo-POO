@@ -1,5 +1,3 @@
-import javax.swing.*;
-
 public class Cacador extends Combatente {
 
     public Cacador(String name) {
