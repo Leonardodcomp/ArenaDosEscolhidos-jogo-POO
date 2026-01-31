@@ -2,8 +2,6 @@ import javax.swing.*;
 
 public class Cacador extends Combatente {
 
-    private JLabel lutador;//é aqui que estará guardada a imagem do lutador para imprimir na tela.
-
     public Cacador(String name) {
         super(80,name); // Vida média-baixa
         this.tipo = "cacador";
@@ -34,11 +32,5 @@ public class Cacador extends Combatente {
         }else{
             System.out.println("você recebeu " + dano + " de dano. Vida restante: " + this.vida);
         }
-    }
-
-    public JLabel imprimir(){
-        ImageIcon persona = new ImageIcon(getClass().getResource("imagens_do_jogo/cacador/gangsterparado.png"));
-        this.lutador = new JLabel(persona);
-        return this.lutador;
     }
 }
