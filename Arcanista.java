@@ -3,7 +3,6 @@ import javax.swing.*;
 public class Arcanista extends Combatente {
 
     private int mana;
-    private JLabel lutador;//é aqui que estará guardada a imagem do lutador para imprimir na tela.
 
     public Arcanista(String name) {
         super(60,name); // Teoricamente é o que da dano, então tem que ser mole
@@ -30,12 +29,6 @@ public class Arcanista extends Combatente {
             System.out.println(this.nome + " está sem mana e jogou uma péda, recarregando chackra...");
             alvo.receberDano(dano);
         }
-    }
-
-    public JLabel imprimir(){
-        ImageIcon persona = new ImageIcon(getClass().getResource("imagens_do_jogo/mage/mago_parado.png"));
-        this.lutador = new JLabel(persona);
-        return this.lutador;
     }
 
     public void receberDano(int dano) {
