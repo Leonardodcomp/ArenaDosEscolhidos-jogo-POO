@@ -3,7 +3,6 @@ import javax.swing.*;
 public class Guardiao extends Combatente {
     
     private int vigor;
-    private JLabel lutador;//é aqui que estará guardada a imagem do lutador para imprimir na tela.
 
     public Guardiao (String name) {
         super(120,name); // vida bufada o homi é tank
@@ -11,11 +10,6 @@ public class Guardiao extends Combatente {
         this.tipo = "Guardiao";
     }
 
-    public JLabel imprimir(){
-        ImageIcon persona = new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_parado.png"));
-        this.lutador = new JLabel(persona);
-        return this.lutador;
-    }
 
     @Override
     public void receberDano(int dano) {
