@@ -17,14 +17,14 @@ public class Arena {
     private JPanel painelMenu;  //Colocamos esse atributo novo por causa do menu e da logistica de botão.
 
 
-    private void atualizarImagemLutadorA(Combatente lutador) {
+    private void LutadorA_parado(Combatente lutador) {
         // Remove imagem anterior, se existir.
         if (img_lutadorA != null) {
             fundo.remove(img_lutadorA);
         }
         
-        // Cria nova imagem.
-        this.img_lutadorA = lutador.imprimir();
+        
+        this.img_lutadorA = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_parado.png")));
         if (img_lutadorA != null) {
             img_lutadorA.setBounds(300, 260, 400, 400);
             fundo.add(img_lutadorA);
@@ -33,14 +33,14 @@ public class Arena {
         }
     }
 
-    private void atualizarImagemLutadorB(Combatente lutador) {
+    private void LutadorB_parado(Combatente lutador) {
         // Remove imagem anterior, se existir.
         if (img_lutadorB != null) {
             fundo.remove(img_lutadorB);
         }
         
         // Cria nova imagem.
-        this.img_lutadorB = lutador.imprimir();
+        this.img_lutadorB = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/knigth/cavaleiro_parado_invertido.png")));
         if (img_lutadorB != null) {
             img_lutadorB.setBounds(1230, 260, 400, 400);
             fundo.add(img_lutadorB);
@@ -264,10 +264,10 @@ public class Arena {
                     //o que o jogador escolheu.
 
                     // Para lutadorA
-                    atualizarImagemLutadorA(lutadorA);
+                    LutadorA_parado(lutadorA);
 
                     // Para lutadorB  
-                    atualizarImagemLutadorB(lutadorB);
+                    LutadorB_parado(lutadorB);
 
                     // Abaixo está o loop que se repetirá até que algum dos dois bonecos morram em combate
                     // Combate entre lutadorA e lutadorB
@@ -345,7 +345,7 @@ public class Arena {
                                 lutadorB = ladoB.get(psc_inimiga);
                                 
                                 // ATUALIZA a imagem do novo lutadorB
-                                atualizarImagemLutadorB(lutadorB);
+                                LutadorB_parado(lutadorB);
                             } else {
                                 // Não há mais inimigos, jogo acaba
                                 break;
