@@ -1,5 +1,3 @@
-import javax.swing.*;
-
 public class Guardiao extends Combatente {
     
     private int vigor;
@@ -7,7 +5,7 @@ public class Guardiao extends Combatente {
     public Guardiao (String name) {
         super(120,name); // vida bufada o homi é tank
         this.vigor = 100;  // Recurso especial
-        this.tipo = "Guardiao";
+        this.tipo = "cavaleiro";
     }
 
 
