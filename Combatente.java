@@ -1,5 +1,4 @@
 import java.util.Random;
-import javax.swing.JLabel;
 
 public abstract class Combatente{
 
