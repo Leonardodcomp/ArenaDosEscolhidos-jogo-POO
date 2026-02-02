@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList; // Importação usada na geração das listas de combantes, a fim de atribuir objetos de diferentes classes em uma única lista
 import java.util.Random; // Importação usada na parte de geração de números aleatórios para distribuição de combatentes para a classe B
-import java.util.function.LongUnaryOperator;
 // Os dois ultimos métodos a seguir são necessários para implementar botão no jogo
 import java.awt.event.ActionEvent; 
 import java.awt.event.ActionListener;
@@ -26,7 +25,7 @@ public class Arena {
         }
         
         
-        this.img_lutadorA = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_parado.png")));
+        this.img_lutadorA = new JLabel(new ImageIcon(getClass().getResource("/imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_parado.png")));
         if (img_lutadorA != null) {
             img_lutadorA.setBounds(300, 260, 400, 400);
             fundo.add(img_lutadorA);
@@ -46,7 +45,7 @@ public class Arena {
         
         // Cria nova imagem de ataque
         img_lutadorA = new JLabel(new ImageIcon(getClass().getResource(
-            "imagens_do_jogo/" + lutador.getTipo() + "/" + lutador.getTipo() + "_atacando.png")));
+            "/imagens_do_jogo/" + lutador.getTipo() + "/" + lutador.getTipo() + "_atacando.png")));
         
         if (img_lutadorA != null) {
             img_lutadorA.setBounds(300, 260, 400, 400);
@@ -61,7 +60,7 @@ public class Arena {
         if("cacador".equals(lutador.getTipo()) || "mago".equals(lutador.getTipo()))
             while(x<1250){
                 try {
-                    ataque_A = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_ataque.png")));
+                    ataque_A = new JLabel(new ImageIcon(getClass().getResource("/imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_ataque.png")));
                     ataque_A.setBounds(x,y,150,150);
                     fundo.add(ataque_A);
                     fundo.revalidate();
@@ -80,7 +79,7 @@ public class Arena {
         
         // Restaura imagem parada
         
-        this.img_lutadorA = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_parado.png")));
+        this.img_lutadorA = new JLabel(new ImageIcon(getClass().getResource("/imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_parado.png")));
         if (img_lutadorA != null) {
             img_lutadorA.setBounds(300, 260, 400, 400);
             fundo.add(img_lutadorA);
@@ -100,7 +99,7 @@ public class Arena {
         }
         
         // Cria nova imagem.
-        this.img_lutadorB = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_parado_invertido.png")));
+        this.img_lutadorB = new JLabel(new ImageIcon(getClass().getResource("/imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_parado_invertido.png")));
         if (img_lutadorB != null) {
             img_lutadorB.setBounds(1230, 260, 400, 400);
             fundo.add(img_lutadorB);
@@ -119,7 +118,7 @@ public class Arena {
         }
         
         // Cria nova imagem de ataque
-        img_lutadorB = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/" + lutador.getTipo() + "/" + lutador.getTipo() + "_atacando_invertido.png")));
+        img_lutadorB = new JLabel(new ImageIcon(getClass().getResource("/imagens_do_jogo/" + lutador.getTipo() + "/" + lutador.getTipo() + "_atacando_invertido.png")));
         
         if (img_lutadorB != null) {
             img_lutadorB.setBounds(1230, 260, 400, 400);
@@ -134,7 +133,7 @@ public class Arena {
         if("cacador".equals(lutador.getTipo()) || "mago".equals(lutador.getTipo()))
             while(x>500){
                 try {
-                    ataque_B = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_ataque_invertido.png")));
+                    ataque_B = new JLabel(new ImageIcon(getClass().getResource("/imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_ataque_invertido.png")));
                     ataque_B.setBounds(x,y,150,150);
                     fundo.add(ataque_B);
                     fundo.revalidate();
@@ -152,7 +151,7 @@ public class Arena {
             fundo.remove(img_lutadorB);
         }
         
-        this.img_lutadorB = new JLabel(new ImageIcon(getClass().getResource("imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_parado_invertido.png")));
+        this.img_lutadorB = new JLabel(new ImageIcon(getClass().getResource("/imagens_do_jogo/"+lutador.getTipo()+"/"+lutador.getTipo()+"_parado_invertido.png")));
         if (img_lutadorB != null) {
             img_lutadorB.setBounds(1230, 260, 400, 400);
             fundo.add(img_lutadorB);
@@ -210,6 +209,7 @@ public class Arena {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Vai remover o metodo menu para começar
+                painelMenu.setVisible(false); //teste 212
                 tela.remove(painelMenu);
                 tela.repaint();
 
@@ -233,10 +233,12 @@ public class Arena {
 
     
     public void carregarCenario() {
+
+
         int largura = Toolkit.getDefaultToolkit().getScreenSize().width;
         int altura  = Toolkit.getDefaultToolkit().getScreenSize().height;
 
-        java.net.URL imgUrl = getClass().getResource("/imagens_do_jogo/Arena/fundo.jpg");
+        java.net.URL imgUrl = getClass().getResource("/imagens_do_jogo/arena/fundo.jpg");
         
         // adicionei um tratamento de falhas (jeito burro) pra se der ruim não crachar
         if (imgUrl != null) {
