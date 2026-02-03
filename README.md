@@ -1,6 +1,8 @@
 # ArenaDosEscolhidos-jogo-POO
 Jogo criado para compor parte da nota da disciplina de Programação Orientada a Objetos
 
+LINK DO VIDEO DE EXPLICAÇÃO: https://drive.google.com/file/d/1A8KKBlORv2rXufBCDwrpNx7ZKgmZhstT/view?usp=drive_link
+
 
 Observações iniciais:
 
